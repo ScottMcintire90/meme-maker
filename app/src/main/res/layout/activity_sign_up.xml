@@ -30,16 +30,62 @@
         android:shadowDy="5"
         android:shadowRadius="5"/>
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/textView"
+        android:id="@+id/button4"
+        android:background="#35699e"
+        android:textColor="#FFF"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
-        android:textSize="25dp"
-        android:textColor="#35699e"
-        android:textStyle="bold" />
+        android:layout_marginBottom="92dp"
+        android:width="200dp"
+        android:textSize="20dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText3"
+        android:gravity="center"
+        android:hint="Name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:width="300dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText4"
+        android:width="300dp"
+        android:gravity="center"
+        android:hint="Email Address"
+        android:layout_below="@+id/editText3"
+        android:layout_alignLeft="@+id/editText3"
+        android:layout_alignStart="@+id/editText3"
+        android:layout_marginTop="49dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText5"
+        android:width="300dp"
+        android:gravity="center"
+        android:hint="Password"
+        android:layout_below="@+id/editText4"
+        android:layout_alignLeft="@+id/editText4"
+        android:layout_alignStart="@+id/editText4"
+        android:layout_marginTop="47dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText6"
+        android:gravity="center"
+        android:hint="Verify Password"
+        android:layout_below="@+id/editText5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:width="300dp" />
 
 </RelativeLayout>
