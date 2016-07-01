@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:id="@+id/button"
+        android:id="@+id/loginButton"
         android:textColor="#FFF"
         android:background="#35699e"
         android:layout_marginTop="41dp"
@@ -80,8 +80,8 @@
         android:text="Sign Up"
         android:background="#35699e"
         android:textColor="#FFF"
-        android:id="@+id/button2"
-        android:layout_alignTop="@+id/button"
+        android:id="@+id/signupButton"
+        android:layout_alignTop="@+id/loginButton"
         android:layout_toRightOf="@+id/imageButton2"
         android:layout_toEndOf="@+id/imageButton2" />
 
@@ -94,7 +94,7 @@
         android:textSize="25dp"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_below="@+id/button"
+        android:layout_below="@+id/loginButton"
         android:layout_centerHorizontal="true" />
 
     <TextView
