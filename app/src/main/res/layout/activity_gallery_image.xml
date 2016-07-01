@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.epicodus.mememaker.MemeActivity">
+    tools:context="com.epicodus.mememaker.GalleryImageActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -30,39 +30,37 @@
         android:shadowDy="5"
         android:shadowRadius="5"/>
 
-    <ImageView
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:id="@+id/memeImageView"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
-
-
-    <ImageButton
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton4"
-        android:src="@drawable/send"
-        android:background="@null"
-        android:paddingLeft="20dp"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_alignRight="@+id/memeImageView"
-        android:layout_alignEnd="@+id/memeImageView" />
+        android:text="Load Image"
+        android:id="@+id/loadImageButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="49dp"
+        android:width="200dp"
+        android:textColor="#FFF"
+        android:background="#35699e"
+        android:textSize="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send To A Contact"
-        android:id="@+id/textView5"
-        android:textSize="25dp"
-        android:textColor="#35699e"
-        android:paddingLeft="40dp"
-        android:paddingBottom="20dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="70dp" />
+        android:text="New Text"
+        android:id="@+id/targetUri"
+        android:layout_marginTop="58dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:width="300dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/targetImage"
+        android:layout_below="@+id/targetUri"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button"
+        android:layout_marginTop="74dp" />
 
 
 </RelativeLayout>
