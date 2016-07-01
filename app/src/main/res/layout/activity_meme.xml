@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.epicodus.mememaker.LoginActivity">
+    tools:context="com.epicodus.mememaker.MemeActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -30,40 +30,24 @@
         android:shadowDy="5"
         android:shadowRadius="5"/>
 
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log In"
-        android:background="#35699e"
-        android:textColor="#FFF"
-        android:id="@+id/loginUserButton"
-        android:layout_marginBottom="175dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:width="200dp"
-        android:textSize="20dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_marginTop="107dp"
-        android:width="300dp"
-        android:gravity="center"
-        android:hint="Username"
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/memeImageView"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="182dp" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
-        android:hint="Password"
-        android:gravity="center"
-        android:layout_below="@+id/editText"
+        android:text="New Text"
+        android:id="@+id/memeDescriptionView"
+        android:textColor="#35699e"
+        android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="51dp"
-        android:width="300dp" />
+        android:textSize="25dp" />
+
 
 </RelativeLayout>

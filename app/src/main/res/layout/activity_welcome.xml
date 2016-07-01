@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.epicodus.mememaker.WelcomeActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/background"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MEME MAKER"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:letterSpacing=".3"
+        android:textColor="#35699e"
+        android:id="@+id/textView"
+        android:shadowColor="#FFF"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:id="@+id/imageButton"
+        android:src="@drawable/camera"
+        android:background="@null"
+        android:layout_marginBottom="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:paddingTop="10dp"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:id="@+id/imageButton2"
+        android:src="@drawable/gallery"
+        android:paddingTop="10dp"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:paddingRight="20dp"
+        android:id="@+id/imageButton3"
+        android:src="@drawable/photos"
+        android:paddingTop="10dp"
+        android:layout_alignTop="@+id/imageButton2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/welcomeName"
+        android:textSize="25dp"
+        android:paddingTop="10dp"
+        android:textColor="#35699e"
+        android:text="Welcome"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Saved Memes"
+        android:id="@+id/textView4"
+        android:layout_marginTop="20dp"
+        android:textSize="18dp"
+        android:textColor="#35699e"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/welcomeName"
+        android:layout_alignLeft="@+id/welcomeName"
+        android:layout_alignStart="@+id/welcomeName" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/memeListView"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/imageButton2" />
+
+
+</RelativeLayout>
