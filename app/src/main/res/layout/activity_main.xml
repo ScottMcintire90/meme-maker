@@ -30,38 +30,6 @@
         android:shadowDy="5"
         android:shadowRadius="5"/>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:id="@+id/cameraButton"
-        android:src="@drawable/camera"
-        android:background="@null"
-        android:layout_marginBottom="35dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:id="@+id/imageButton2"
-        android:src="@drawable/gallery"
-        android:layout_alignTop="@+id/cameraButton"
-        android:layout_centerHorizontal="true" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:paddingRight="20dp"
-        android:id="@+id/photoButton"
-        android:src="@drawable/photos"
-        android:layout_alignTop="@+id/imageButton2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,10 +37,10 @@
         android:id="@+id/loginButton"
         android:textColor="#FFF"
         android:background="#35699e"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="44dp"
         android:layout_below="@+id/textView"
-        android:layout_toRightOf="@+id/imageButton"
-        android:layout_toEndOf="@+id/imageButton" />
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
 
     <Button
         android:layout_width="wrap_content"
@@ -82,8 +50,8 @@
         android:textColor="#FFF"
         android:id="@+id/signupButton"
         android:layout_alignTop="@+id/loginButton"
-        android:layout_toRightOf="@+id/imageButton2"
-        android:layout_toEndOf="@+id/imageButton2" />
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -100,7 +68,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login or Sign Up, or just get right to it and click an icon below to choose your image!"
+        android:text="Login or Sign Up to make your first meme!"
         android:id="@+id/textView3"
         android:textSize="20dp"
         android:textColor="@color/colorPrimaryDark"
