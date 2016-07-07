@@ -3,32 +3,26 @@ package com.epicodus.mememaker;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Meme implements Parcelable {
-    int mImageId;
+public class Meme {
+    private String mName;
+    private String mUrl;
+    private double mId;
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public Meme(String name, String url, double id) {
+        this.mName = name;
+        this.mUrl = url;
+        this.mId = id;
     }
 
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(mImageId);
+    public String getName() {
+        return mName;
     }
-    public Meme (int sImageId) {
-        this.mImageId = sImageId;
+
+    public String getUrl() {
+        return mUrl;
     }
-    public static final Parcelable.Creator<Meme> CREATOR = new Parcelable.Creator<Meme>() {
-        public Meme createFromParcel(Parcel in) {
-            return new Meme(in);
-        }
 
-        public Meme[] newArray(int size) {
-            return new Meme[size];
-        }
-    };
-
-    private Meme(Parcel in) {
-        mImageId = in.readInt();
+    public double getId() {
+        return mId;
     }
 }

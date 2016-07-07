@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -57,7 +57,8 @@
                 android:value="com.epicodus.mememaker.MainActivity" />
         </activity>
         <activity android:name=".CameraImageActivity" />
-        <activity android:name=".EditMemeActivity"></activity>
+        <activity android:name=".EditMemeActivity" />
+        <activity android:name=".PhotoAPIActivity"></activity>
     </application>
 
 </manifest>

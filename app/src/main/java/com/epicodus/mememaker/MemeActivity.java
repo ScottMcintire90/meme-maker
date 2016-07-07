@@ -16,9 +16,5 @@ public class MemeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meme);
         ButterKnife.bind(this);
-
-        Meme meme = getIntent().getParcelableExtra("memeObject");
-
-        mMemeImageView.setImageResource(meme.mImageId);
     }
 }

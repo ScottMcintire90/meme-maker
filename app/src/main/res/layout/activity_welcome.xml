@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
-        android:id="@+id/imageButton"
+        android:id="@+id/cameraButton"
         android:src="@drawable/camera"
         android:background="@null"
         android:layout_marginBottom="35dp"
@@ -47,10 +47,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        android:id="@+id/imageButton2"
+        android:id="@+id/photoButton"
         android:src="@drawable/gallery"
         android:paddingTop="10dp"
-        android:layout_alignTop="@+id/imageButton"
+        android:layout_alignTop="@+id/cameraButton"
         android:layout_centerHorizontal="true" />
 
     <ImageButton
@@ -58,12 +58,13 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:paddingRight="20dp"
-        android:id="@+id/imageButton3"
+        android:id="@+id/galleryButton"
         android:src="@drawable/photos"
         android:paddingTop="10dp"
-        android:layout_alignTop="@+id/imageButton2"
+        android:layout_alignTop="@+id/photoButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -95,7 +96,6 @@
         android:id="@+id/memeListView"
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/imageButton2" />
-
+        android:layout_above="@+id/photoButton" />
 
 </RelativeLayout>

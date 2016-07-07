@@ -13,8 +13,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     @Bind(R.id.loginButton) Button mLoginButton;
     @Bind(R.id.signupButton) Button mSignupButton;
-    @Bind(R.id.photoButton) ImageButton mPhotoButton;
-    @Bind(R.id.cameraButton) ImageButton mCameraButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +32,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        mPhotoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, GalleryImageActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        mCameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CameraImageActivity.class);
                 startActivity(intent);
             }
         });
