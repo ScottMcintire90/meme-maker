@@ -1,6 +1,8 @@
 package com.epicodus.mememaker;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,9 +43,10 @@ public class MemeListAdapter extends RecyclerView.Adapter<MemeListAdapter.MemeVi
         return mMemes.size();
     }
 
-    public class MemeViewHolder extends RecyclerView.ViewHolder {
+    public class MemeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Bind(R.id.memeImageView) ImageView mMemeImageView;
         @Bind(R.id.memeNameTextView) TextView mMemeNameTextView;
+
 
         private Context mContext;
 
@@ -51,6 +54,17 @@ public class MemeListAdapter extends RecyclerView.Adapter<MemeListAdapter.MemeVi
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, EditMemeActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("image", mMemes.get(getAdapterPosition()).getUrl());
+            intent.putExtras(bundle);
+            mContext.startActivity(intent);
         }
 
         public void bindMeme(Meme meme) {
