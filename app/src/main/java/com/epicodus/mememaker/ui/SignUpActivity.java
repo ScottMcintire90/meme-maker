@@ -1,4 +1,4 @@
-package com.epicodus.mememaker;
+package com.epicodus.mememaker.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,22 +6,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.epicodus.mememaker.R;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class LoginActivity extends AppCompatActivity {
-    @Bind(R.id.loginUserButton) Button mLoginUserButton;
+public class SignUpActivity extends AppCompatActivity {
+    @Bind(R.id.signupUserButton) Button mSignupUserButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
 
-        mLoginUserButton.setOnClickListener(new View.OnClickListener() {
+        mSignupUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, WelcomeActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,4 +1,4 @@
-package com.epicodus.mememaker;
+package com.epicodus.mememaker.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

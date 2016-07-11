@@ -1,4 +1,4 @@
-package com.epicodus.mememaker;
+package com.epicodus.mememaker.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.epicodus.mememaker.R;
+import com.epicodus.mememaker.models.Meme;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

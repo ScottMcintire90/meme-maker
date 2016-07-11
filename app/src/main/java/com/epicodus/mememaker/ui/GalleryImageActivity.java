@@ -1,4 +1,4 @@
-package com.epicodus.mememaker;
+package com.epicodus.mememaker.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import java.io.FileNotFoundException;
@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.epicodus.mememaker.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

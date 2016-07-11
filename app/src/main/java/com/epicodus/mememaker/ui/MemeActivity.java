@@ -1,9 +1,11 @@
-package com.epicodus.mememaker;
+package com.epicodus.mememaker.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.ImageView;
+
+import com.epicodus.mememaker.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

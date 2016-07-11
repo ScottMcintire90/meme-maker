@@ -1,4 +1,4 @@
-package com.epicodus.mememaker;
+package com.epicodus.mememaker.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +10,12 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.epicodus.mememaker.R;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener{
     private String mName;
     @Bind(R.id.memeListView) ListView mMemeListView;
     @Bind(R.id.welcomeName) TextView mWelcomeName;
@@ -32,28 +34,25 @@ public class WelcomeActivity extends AppCompatActivity {
         intent.putExtra("name", mName);
         mWelcomeName.setText("Welcome Scott!");
 
-        mGalleryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mCameraButton.setOnClickListener(this);
+        mGalleryButton.setOnClickListener(this);
+        mPhotoButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == mGalleryButton) {
                 Intent intent = new Intent(WelcomeActivity.this, GalleryImageActivity.class);
                 startActivity(intent);
             }
-        });
 
-        mCameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if(v == mCameraButton) {
                 Intent intent = new Intent(WelcomeActivity.this, CameraImageActivity.class);
                 startActivity(intent);
             }
-        });
-
-        mPhotoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if(v == mPhotoButton) {
                 Intent intent = new Intent(WelcomeActivity.this, PhotoAPIActivity.class);
                 startActivity(intent);
             }
-        });
     }
 }

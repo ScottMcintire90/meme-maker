@@ -1,4 +1,4 @@
-package com.epicodus.mememaker;
+package com.epicodus.mememaker.ui;
 
 import android.Manifest;
 import android.content.Intent;
@@ -16,6 +16,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.epicodus.mememaker.R;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;

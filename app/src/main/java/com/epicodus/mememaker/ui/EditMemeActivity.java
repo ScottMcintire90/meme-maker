@@ -1,4 +1,4 @@
-package com.epicodus.mememaker;
+package com.epicodus.mememaker.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -6,11 +6,15 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.epicodus.mememaker.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -24,8 +28,10 @@ import butterknife.ButterKnife;
 public class EditMemeActivity extends AppCompatActivity {
     public static final String TAG = EditMemeActivity.class.getSimpleName();
 
-    @Bind(R.id.editMemeImage)
-    ImageView mEditMemeImage;
+    @Bind(R.id.editMemeImage) ImageView mEditMemeImage;
+    @Bind(R.id.editUpperText) EditText mEditUpperText;
+    @Bind(R.id.editLowerText) EditText mEditLowerText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,28 +45,5 @@ public class EditMemeActivity extends AppCompatActivity {
 
         Picasso.with(EditMemeActivity.this).load(image).into(mEditMemeImage);
 
-//        getBitmapFromURL(image);
-//
-//        Bitmap bitmap = getBitmapFromURL(image); // Load your bitmap here
-//        Canvas canvas = new Canvas(bitmap);
-//        Paint paint = new Paint();
-//        paint.setColor(Color.WHITE);
-//        paint.setTextSize(20);
-//        canvas.drawText("Some Text here", 5, 5, paint);
-    }
-
-    public static Bitmap getBitmapFromURL(String image) {
-        try {
-            URL url = new URL(image);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            // Log exception
-            return null;
-        }
     }
 }

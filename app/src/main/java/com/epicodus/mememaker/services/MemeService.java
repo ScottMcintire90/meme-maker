@@ -1,5 +1,7 @@
-package com.epicodus.mememaker;
+package com.epicodus.mememaker.services;
 
+
+import com.epicodus.mememaker.models.Meme;
 
 import org.json.JSONArray;
 import org.json.JSONException;

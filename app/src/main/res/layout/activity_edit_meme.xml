@@ -37,7 +37,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText7"
+        android:id="@+id/editUpperText"
         android:width="350dp"
         android:hint="Input Upper Text"
         android:gravity="center"
@@ -56,7 +56,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText8"
+        android:id="@+id/editLowerText"
         android:width="350dp"
         android:textColorHint="#35699e"
         android:hint="Input Lower Text"
