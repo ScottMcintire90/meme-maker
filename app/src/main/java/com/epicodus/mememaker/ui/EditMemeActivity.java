@@ -1,5 +1,6 @@
 package com.epicodus.mememaker.ui;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.ContextThemeWrapper;
@@ -36,26 +37,28 @@ public class EditMemeActivity extends AppCompatActivity {
     private Meme mCurrentMeme;
     private String mCurrentColor;
 
-//    @Bind(R.id.editMemeImage) ImageView mEditMemeImage;
+    @Bind(R.id.editMemeImage) ImageView mEditMemeImage;
 //    @Bind(R.id.editUpperText) EditText mEditUpperText;
 //    @Bind(R.id.editLowerText) EditText mEditLowerText;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_meme);
-        ButterKnife.bind(this);
-
-        Intent intent = getIntent();
-        String image = intent.getStringExtra("image");
-        Log.d(TAG, image);
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_edit_meme);
+//        ButterKnife.bind(this);
+//
+//        Intent intent = getIntent();
+//        String image = intent.getStringExtra("image");
+//        Log.d(TAG, image);
+//
+//        mEditMemeImage.setImageBitmap(mMeme.getBitmap());
 
 //        Picasso.with(EditMemeActivity.this).load(image).into(mEditMemeImage);
 
-        mMemeTexts = new ArrayList<EditText>();
-        mMemeContainer = (FrameLayout) findViewById(R.id.meme_container);
-        mMemeBitmapHolder = (MemeImageView) findViewById(R.id.meme_bitmap_container);
+//        mMemeTexts = new ArrayList<EditText>();
+//        mMemeContainer = (FrameLayout) findViewById(R.id.meme_container);
+//        mMemeBitmapHolder = (MemeImageView) findViewById(R.id.meme_bitmap_container);
 
 //        if(this.getIntent().hasExtra(EXTRA_IMAGE_FILE_PATH)) {
 //            mImageFilePath = this.getIntent().getStringExtra(EXTRA_IMAGE_FILE_PATH);
@@ -73,96 +76,96 @@ public class EditMemeActivity extends AppCompatActivity {
 //            }
 //        }
 
-        mMemeBitmapHolder.setImageBitmap(mCurrentMeme.getBitmap());
-        mMemeBitmapHolder.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (MotionEvent.ACTION_UP == motionEvent.getAction()) {
-                    int touchX = (int) motionEvent.getX();
-                    int touchY = (int) motionEvent.getY();
-
-                    addAnnotation(touchX, touchY, mCurrentColor);
-                    addEditTextOverImage("Title", touchX, touchY, mCurrentColor);
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        });
-    }
-
-    private void addAnnotation(int touchX, int touchY, String mCurrentColor) {
-        MemeAnnotation annotation = new MemeAnnotation();
-        annotation.setColor(mCurrentColor);
-        annotation.setLocationX(touchX);
-        annotation.setLocationY(touchY);
-
-        if(mCurrentMeme.getAnnotations() == null) {
-            mCurrentMeme.setAnnotations(new ArrayList<MemeAnnotation>());
-        }
-
-        mCurrentMeme.getAnnotations().add(annotation);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.save_action) {
-            final EditText input = new EditText(this);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT);
-            input.setLayoutParams(lp);
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder
-                    .setTitle("Name of meme?")
-                    .setMessage("Please give this meme a name.")
-                    .setView(input)
-                    .setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            String memeName = input.getText().toString();
-                            saveMeme();
-                            finish();
-                        }
-                    });
-            builder.show();
-            return true;
-        } else if(id == android.R.id.home) {
-            finish();
-            return true;
-        } else if(id == R.id.choose_font_action) {
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void addEditTextOverImage(String title, int x, int y, String color) {
-        ContextThemeWrapper newContext = new ContextThemeWrapper(this, R.style.holoLightLess);
-        EditText editText = new EditText(this);
-        editText.setText(title);
-        editText.setBackground(null);
-        editText.setTextColor(Color.parseColor(color));
-
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(x, y, 0, 0);
-        editText.setLayoutParams(layoutParams);
-        mMemeContainer.addView(editText);
-        editText.requestFocus();
-        mMemeTexts.add(editText);
-    }
-
-    private void saveMeme() {
-        for (int i = 0; i < mMemeTexts.size(); i++) {
-            EditText editText = mMemeTexts.get(i);
-            MemeAnnotation annotation = mCurrentMeme.getAnnotations().get(i);
-            annotation.setTitle(editText.getText().toString());
-        }
-
-        Intent intent = new Intent(EditMemeActivity.this, TestActivity.class);
-        startActivity(intent);
-    }
+//        mMemeBitmapHolder.setImageBitmap(mCurrentMeme.getBitmap());
+//        mMemeBitmapHolder.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                if (MotionEvent.ACTION_UP == motionEvent.getAction()) {
+//                    int touchX = (int) motionEvent.getX();
+//                    int touchY = (int) motionEvent.getY();
+//
+//                    addAnnotation(touchX, touchY, mCurrentColor);
+//                    addEditTextOverImage("Title", touchX, touchY, mCurrentColor);
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+//            }
+//        });
+//    }
+//
+//    private void addAnnotation(int touchX, int touchY, String mCurrentColor) {
+//        MemeAnnotation annotation = new MemeAnnotation();
+//        annotation.setColor(mCurrentColor);
+//        annotation.setLocationX(touchX);
+//        annotation.setLocationY(touchY);
+//
+//        if(mCurrentMeme.getAnnotations() == null) {
+//            mCurrentMeme.setAnnotations(new ArrayList<MemeAnnotation>());
+//        }
+//
+//        mCurrentMeme.getAnnotations().add(annotation);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == R.id.save_action) {
+//            final EditText input = new EditText(this);
+//            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+//                    LinearLayout.LayoutParams.MATCH_PARENT,
+//                    LinearLayout.LayoutParams.MATCH_PARENT);
+//            input.setLayoutParams(lp);
+//
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder
+//                    .setTitle("Name of meme?")
+//                    .setMessage("Please give this meme a name.")
+//                    .setView(input)
+//                    .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialogInterface, int i) {
+//                            String memeName = input.getText().toString();
+//                            saveMeme();
+//                            finish();
+//                        }
+//                    });
+//            builder.show();
+//            return true;
+//        } else if(id == android.R.id.home) {
+//            finish();
+//            return true;
+//        } else if(id == R.id.choose_font_action) {
+//
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+//
+//    private void addEditTextOverImage(String title, int x, int y, String color) {
+//        ContextThemeWrapper newContext = new ContextThemeWrapper(this, R.style.holoLightLess);
+//        EditText editText = new EditText(this);
+//        editText.setText(title);
+//        editText.setBackground(null);
+//        editText.setTextColor(Color.parseColor(color));
+//
+//        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        layoutParams.setMargins(x, y, 0, 0);
+//        editText.setLayoutParams(layoutParams);
+//        mMemeContainer.addView(editText);
+//        editText.requestFocus();
+//        mMemeTexts.add(editText);
+//    }
+//
+//    private void saveMeme() {
+//        for (int i = 0; i < mMemeTexts.size(); i++) {
+//            EditText editText = mMemeTexts.get(i);
+//            MemeAnnotation annotation = mCurrentMeme.getAnnotations().get(i);
+//            annotation.setTitle(editText.getText().toString());
+//        }
+//
+//        Intent intent = new Intent(EditMemeActivity.this, TestActivity.class);
+//        startActivity(intent);
+//    }
 
 
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.epicodus.mememaker.R;
 import com.epicodus.mememaker.models.Meme;
 import com.epicodus.mememaker.ui.EditMemeActivity;
+import com.epicodus.mememaker.ui.MemeDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -65,7 +66,7 @@ public class MemeListAdapter extends RecyclerView.Adapter<MemeListAdapter.MemeVi
         @Override
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();
-            Intent intent = new Intent(mContext, EditMemeActivity.class);
+            Intent intent = new Intent(mContext, MemeDetailActivity.class);
             intent.putExtra("position", itemPosition + "");
             intent.putExtra("memes", Parcels.wrap(mMemes));
 //            Bundle bundle = new Bundle();

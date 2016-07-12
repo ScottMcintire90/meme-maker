@@ -27,11 +27,11 @@ public class MemeItemFragment extends Fragment {
     private Meme mMeme;
 
     public static MemeItemFragment newInstance(Meme meme) {
-        MemeItemFragment restaurantDetailFragment = new MemeItemFragment();
+        MemeItemFragment memeItemFragment = new MemeItemFragment();
         Bundle args = new Bundle();
-        args.putParcelable("restaurant", Parcels.wrap(meme));
-        restaurantDetailFragment.setArguments(args);
-        return restaurantDetailFragment;
+        args.putParcelable("meme", Parcels.wrap(meme));
+        memeItemFragment.setArguments(args);
+        return memeItemFragment;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MemeItemFragment extends Fragment {
                              Bundle savedInstanceState)
     {View view = inflater.inflate(R.layout.fragment_meme_item, container, false);
         ButterKnife.bind(this, view);
-        mEditMemeImage.setImageBitmap(mMeme.getBitmap());
+        mEditMemeImage.setImageBitmap(mMeme.getBitmapFromURL(mMeme.getUrl()));
         mName.setText(mMeme.getName());
         return view;
     }

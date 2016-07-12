@@ -2,8 +2,7 @@ package com.epicodus.mememaker.models;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Parcel;
-import android.os.Parcelable;
+import org.parceler.Parcel;
 import android.util.Log;
 
 import java.io.File;
@@ -13,11 +12,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+@Parcel
 public class Meme {
-    private String mName;
-    private String mUrl;
-    private ArrayList<MemeAnnotation> mAnnotations;
-    private double mId;
+    String mName;
+    String mUrl;
+    ArrayList<MemeAnnotation> mAnnotations;
+    double mId;
+
+    public Meme() {};
 
     public Meme(String name, String url, ArrayList<MemeAnnotation> annotations, double id) {
         this.mName = name;
@@ -38,15 +40,15 @@ public class Meme {
         return mId;
     }
 
-    public Bitmap getBitmap() {
-        File file = new File(mUrl);
-        if(!file.exists()) {
-            Log.e("FILE IS MISSING", mUrl);
-        }
-        return BitmapFactory.decodeFile(mUrl);
-    }
+//    public Bitmap getBitmap() {
+//        File file = new File(mUrl);
+//        if(!file.exists()) {
+//            Log.e("FILE IS MISSING", mUrl);
+//        }
+//        return BitmapFactory.decodeFile(mUrl);
+//    }
 
-    public Bitmap getBitmapFromURL() {
+    public Bitmap getBitmapFromURL(String mUrl) {
         try {
             URL url = new URL(mUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
