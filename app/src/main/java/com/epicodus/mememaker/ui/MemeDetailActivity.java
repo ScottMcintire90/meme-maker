@@ -13,6 +13,8 @@ import butterknife.ButterKnife;
 import com.epicodus.mememaker.R;
 import com.epicodus.mememaker.adapters.MemePagerAdapter;
 import com.epicodus.mememaker.models.Meme;
+import com.epicodus.mememaker.ui.fragments.MemeItemFragment;
+import com.epicodus.mememaker.ui.fragments.bottom_picture_fragment;
 
 public class MemeDetailActivity extends AppCompatActivity {
     @Bind(R.id.viewPager) ViewPager mViewPager;
@@ -31,5 +33,13 @@ public class MemeDetailActivity extends AppCompatActivity {
         adapterViewPager = new MemePagerAdapter(getSupportFragmentManager(), mMemes);
         mViewPager.setAdapter(adapterViewPager);
         mViewPager.setCurrentItem(startingPosition);
+
     }
+
+//    @Override
+//    public void createMeme(String top, String bottom) {
+//        bottom_picture_fragment bottomFragment = (bottom_picture_fragment) getSupportFragmentManager().findFragmentById(R.id.memeItemFragment);
+//        bottomFragment.setMemeText(top, bottom);
+//    }
 }
+

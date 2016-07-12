@@ -33,6 +33,27 @@
     android:layout_below="@+id/editMemeImage"
     android:layout_centerHorizontal="true"
     android:gravity="center"     />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/topText"
+        android:width="350dp"
+        android:gravity="center"
+        android:layout_marginLeft="30dp"
+        android:hint="Top Text Input"
+        android:layout_marginTop="320dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomText"
+        android:width="350dp"
+        android:gravity="center"
+        android:layout_marginLeft="30dp"
+        android:hint="Bottom Text Input"
+        android:layout_marginTop="380dp" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +63,7 @@
         android:textColor="#FFF"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="500dp"
         android:layout_marginLeft="110dp"
         android:width="200dp"
         android:textSize="20dp" />

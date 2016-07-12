@@ -24,4 +24,7 @@
     <string name="action_choose_font">Font</string>
     <string name="storage_key">STORAGE</string>
     <string name="storage_default_value">INTERNAL</string>
+    <string name="button_generate">GEnerate</string>
+    <string name="Top_text">Top</string>
+    <string name="Bottom_text">Bottom</string>
 </resources>
