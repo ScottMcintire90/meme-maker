@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.epicodus.mememaker.R;
+import com.epicodus.mememaker.adapters.MemeListAdapter;
 import com.epicodus.mememaker.models.Meme;
 import com.epicodus.mememaker.services.MemeService;
 

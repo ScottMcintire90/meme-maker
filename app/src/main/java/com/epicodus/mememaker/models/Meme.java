@@ -12,14 +12,12 @@ import java.util.ArrayList;
 public class Meme {
     private String mName;
     private String mUrl;
-    private ArrayList<MemeAnnotation> mAnnotations;
     private double mId;
 
-    public Meme(String name, String url, ArrayList<MemeAnnotation> annotations, double id) {
+    public Meme(String name, String url, double id) {
         this.mName = name;
         this.mUrl = url;
         this.mId = id;
-        this.mAnnotations = annotations;
     }
 
     public String getName() {
@@ -34,19 +32,4 @@ public class Meme {
         return mId;
     }
 
-    public Bitmap getBitmap() {
-        File file = new File(mUrl);
-        if(!file.exists()) {
-            Log.e("FILE IS MISSING", mUrl);
-        }
-        return BitmapFactory.decodeFile(mUrl);
-    }
-
-    public void setAnnotations(ArrayList<MemeAnnotation> annotations) {
-        mAnnotations = annotations;
-    }
-
-    public ArrayList<MemeAnnotation> getAnnotations() {
-        return mAnnotations;
-    }
 }

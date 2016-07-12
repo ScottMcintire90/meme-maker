@@ -1,100 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/meme_container">
-    <com.epicodus.mememaker.ui.EditMemeActivity
-        android:layout_width="match_parent"
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/meme_container">-->
+    <!--<com.epicodus.mememaker.ui.EditMemeActivity-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:src="@drawable/facepalm"-->
+        <!--android:id="@+id/meme_bitmap_container"/>-->
+<!--</FrameLayout>-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.epicodus.mememaker.ui.EditMemeActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/background"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:maxHeight="300dp"
+        android:scaleType="fitStart"
+        android:adjustViewBounds= "true"
+        android:id="@+id/editMemeImage"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/facepalm"
-        android:id="@+id/meme_bitmap_container"/>
-</FrameLayout>
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--tools:context="com.epicodus.mememaker.ui.EditMemeActivity">-->
+        android:text="Add Text to Meme"
+        android:textColor="#35699e"
+        android:id="@+id/textView6"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/editMemeImage"
+        android:layout_centerHorizontal="true" />
 
-    <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:id="@+id/imageView"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:src="@drawable/background"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:layout_alignParentTop="true" />-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editUpperText"
+        android:width="350dp"
+        android:hint="Input Upper Text"
+        android:gravity="center"
+        android:textColor="#FFF"
+        android:textColorHint="#35699e"
+        android:shadowColor="#000000"
+        android:textSize="26dp"
+        android:shadowDx="3"
+        android:background="@android:color/transparent"
+        android:shadowDy="3"
+        android:shadowRadius="10"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <!--<ImageView-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="300dp"-->
-        <!--android:maxHeight="300dp"-->
-        <!--android:scaleType="fitStart"-->
-        <!--android:adjustViewBounds= "true"-->
-        <!--android:id="@+id/editMemeImage"-->
-        <!--android:layout_centerHorizontal="true"/>-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editLowerText"
+        android:width="350dp"
+        android:textColorHint="#35699e"
+        android:hint="Input Lower Text"
+        android:textColor="#FFF"
+        android:shadowColor="#000000"
+        android:gravity="center"
+        android:textSize="26dp"
+        android:shadowDx="3"
+        android:background="@android:color/transparent"
+        android:shadowDy="3"
+        android:shadowRadius="10"
+        android:layout_marginBottom="84dp"
+        android:layout_above="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Add Text to Meme"-->
-        <!--android:textColor="#35699e"-->
-        <!--android:id="@+id/textView6"-->
-        <!--android:textSize="22dp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:layout_below="@+id/editMemeImage"-->
-        <!--android:layout_centerHorizontal="true" />-->
-
-    <!--<EditText-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/editUpperText"-->
-        <!--android:width="350dp"-->
-        <!--android:hint="Input Upper Text"-->
-        <!--android:gravity="center"-->
-        <!--android:textColor="#FFF"-->
-        <!--android:textColorHint="#35699e"-->
-        <!--android:shadowColor="#000000"-->
-        <!--android:textSize="26dp"-->
-        <!--android:shadowDx="3"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:shadowDy="3"-->
-        <!--android:shadowRadius="10"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true" />-->
-
-    <!--<EditText-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/editLowerText"-->
-        <!--android:width="350dp"-->
-        <!--android:textColorHint="#35699e"-->
-        <!--android:hint="Input Lower Text"-->
-        <!--android:textColor="#FFF"-->
-        <!--android:shadowColor="#000000"-->
-        <!--android:gravity="center"-->
-        <!--android:textSize="26dp"-->
-        <!--android:shadowDx="3"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:shadowDy="3"-->
-        <!--android:shadowRadius="10"-->
-        <!--android:layout_marginBottom="84dp"-->
-        <!--android:layout_above="@+id/textView6"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true" />-->
-
-    <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Save Meme"-->
-        <!--android:id="@+id/button2"-->
-        <!--android:background="#35699e"-->
-        <!--android:textColor="#FFF"-->
-        <!--android:width="150dp"-->
-        <!--android:textSize="18dp"-->
-        <!--android:layout_marginBottom="35dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_centerHorizontal="true" />-->
-<!--</RelativeLayout>-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Meme"
+        android:id="@+id/button2"
+        android:background="#35699e"
+        android:textColor="#FFF"
+        android:width="150dp"
+        android:textSize="18dp"
+        android:layout_marginBottom="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
