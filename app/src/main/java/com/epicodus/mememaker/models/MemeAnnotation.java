@@ -31,6 +31,7 @@ public class MemeAnnotation implements Serializable {
     public String getTitle() {
         return mTitle;
     }
+
     public void setTitle(String text) { mTitle = text; }
 
     public int getLocationX() {

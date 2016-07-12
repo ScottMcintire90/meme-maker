@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -58,7 +59,9 @@
         </activity>
         <activity android:name=".ui.CameraImageActivity" />
         <activity android:name=".ui.EditMemeActivity" />
-        <activity android:name=".ui.PhotoAPIActivity"></activity>
+        <activity android:name=".ui.PhotoAPIActivity" />
+        <activity android:name=".ui.TestActivity" />
+        <activity android:name=".ui.MemeDetailActivity"></activity>
     </application>
 
 </manifest>

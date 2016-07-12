@@ -2,6 +2,7 @@ package com.epicodus.mememaker.services;
 
 
 import com.epicodus.mememaker.models.Meme;
+import com.epicodus.mememaker.models.MemeAnnotation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +50,8 @@ public class MemeService {
                     String name = memeJSON.getString("name");
                     double id = memeJSON.getDouble("id");
                     String url = memeJSON.getString("url");
-                    Meme meme = new Meme(name, url, id);
+                    ArrayList<MemeAnnotation> annotations = new ArrayList<MemeAnnotation>();
+                    Meme meme = new Meme(name, url, annotations, id);
                     memes.add(meme);
                 }
             }

@@ -7,6 +7,10 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class Meme {
@@ -40,6 +44,21 @@ public class Meme {
             Log.e("FILE IS MISSING", mUrl);
         }
         return BitmapFactory.decodeFile(mUrl);
+    }
+
+    public Bitmap getBitmapFromURL() {
+        try {
+            URL url = new URL(mUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void setAnnotations(ArrayList<MemeAnnotation> annotations) {

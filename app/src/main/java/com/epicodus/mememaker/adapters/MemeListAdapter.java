@@ -15,6 +15,8 @@ import com.epicodus.mememaker.models.Meme;
 import com.epicodus.mememaker.ui.EditMemeActivity;
 import com.squareup.picasso.Picasso;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -64,9 +66,11 @@ public class MemeListAdapter extends RecyclerView.Adapter<MemeListAdapter.MemeVi
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();
             Intent intent = new Intent(mContext, EditMemeActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("image", mMemes.get(getAdapterPosition()).getUrl());
-            intent.putExtras(bundle);
+            intent.putExtra("position", itemPosition + "");
+            intent.putExtra("memes", Parcels.wrap(mMemes));
+//            Bundle bundle = new Bundle();
+//            bundle.putString("image", mMemes.get(getAdapterPosition()).getUrl());
+//            intent.putExtras(bundle);
             mContext.startActivity(intent);
         }
 

@@ -1,5 +1,6 @@
 package com.epicodus.mememaker.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.ContextThemeWrapper;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.app.AlertDialog;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,9 +36,9 @@ public class EditMemeActivity extends AppCompatActivity {
     private Meme mCurrentMeme;
     private String mCurrentColor;
 
-    @Bind(R.id.editMemeImage) ImageView mEditMemeImage;
-    @Bind(R.id.editUpperText) EditText mEditUpperText;
-    @Bind(R.id.editLowerText) EditText mEditLowerText;
+//    @Bind(R.id.editMemeImage) ImageView mEditMemeImage;
+//    @Bind(R.id.editUpperText) EditText mEditUpperText;
+//    @Bind(R.id.editLowerText) EditText mEditLowerText;
 
 
     @Override
@@ -49,7 +51,7 @@ public class EditMemeActivity extends AppCompatActivity {
         String image = intent.getStringExtra("image");
         Log.d(TAG, image);
 
-        Picasso.with(EditMemeActivity.this).load(image).into(mEditMemeImage);
+//        Picasso.with(EditMemeActivity.this).load(image).into(mEditMemeImage);
 
         mMemeTexts = new ArrayList<EditText>();
         mMemeContainer = (FrameLayout) findViewById(R.id.meme_container);
@@ -121,7 +123,6 @@ public class EditMemeActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             String memeName = input.getText().toString();
-                            mCurrentMeme.setName(memeName);
                             saveMeme();
                             finish();
                         }
@@ -150,6 +151,17 @@ public class EditMemeActivity extends AppCompatActivity {
         mMemeContainer.addView(editText);
         editText.requestFocus();
         mMemeTexts.add(editText);
+    }
+
+    private void saveMeme() {
+        for (int i = 0; i < mMemeTexts.size(); i++) {
+            EditText editText = mMemeTexts.get(i);
+            MemeAnnotation annotation = mCurrentMeme.getAnnotations().get(i);
+            annotation.setTitle(editText.getText().toString());
+        }
+
+        Intent intent = new Intent(EditMemeActivity.this, TestActivity.class);
+        startActivity(intent);
     }
 
 
