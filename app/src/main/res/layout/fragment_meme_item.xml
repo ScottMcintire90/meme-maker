@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.epicodus.mememaker.ui.fragments.MemeItemFragment">
 
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
@@ -34,6 +33,19 @@
     android:layout_below="@+id/editMemeImage"
     android:layout_centerHorizontal="true"
     android:gravity="center"     />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Meme"
+        android:id="@+id/createMeme"
+        android:background="#35699e"
+        android:textColor="#FFF"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="110dp"
+        android:width="200dp"
+        android:textSize="20dp" />
 
 
 </FrameLayout>

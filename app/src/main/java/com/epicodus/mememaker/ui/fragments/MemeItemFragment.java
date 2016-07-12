@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import butterknife.ButterKnife;
 public class MemeItemFragment extends Fragment {
     @Bind(R.id.editMemeImage) ImageView mEditMemeImage;
     @Bind(R.id.name) TextView mName;
+    @Bind(R.id.createMeme) Button mCreateMeme;
 
     private Meme mMeme;
 
@@ -38,8 +40,9 @@ public class MemeItemFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMeme = Parcels.unwrap(getArguments().getParcelable("meme"));
-    }
 
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,5 +53,6 @@ public class MemeItemFragment extends Fragment {
         mName.setText(mMeme.getName());
         return view;
     }
+
 
 }
