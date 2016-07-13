@@ -60,7 +60,7 @@ public class EditMemeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String image = intent.getStringExtra("image");
-        final String upper = mEditUpperText.getText().toString();
+        String upper = mEditUpperText.getText().toString();
         final String lower = mEditLowerText.getText().toString();
         final Bitmap memeBitmap = getBitmapFromURL(image);
 
@@ -76,6 +76,7 @@ public class EditMemeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(EditMemeActivity.this, MemeActivity.class);
                 intent.putExtra("bitmap", byteArray);
+                String upper = mEditUpperText.getText().toString();
                 intent.putExtra("upper", upper);
                 intent.putExtra("lower", lower);
                 startActivity(intent);
