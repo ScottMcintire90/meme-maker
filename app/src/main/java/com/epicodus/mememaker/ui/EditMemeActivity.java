@@ -47,24 +47,16 @@ import butterknife.ButterKnife;
 
 public class EditMemeActivity extends AppCompatActivity {
 
-    @Bind(R.id.editMemeImage)
-    ImageView mEditMemeImage;
-    @Bind(R.id.editUpperText)
-    EditText mEditUpperText;
-    @Bind(R.id.editLowerText)
-    EditText mEditLowerText;
-    @Bind(R.id.saveMeme)
-    Button mSaveMeme;
-
-    private File file;
+    @Bind(R.id.editMemeImage) ImageView mEditMemeImage;
+    @Bind(R.id.editUpperText) EditText mEditUpperText;
+    @Bind(R.id.editLowerText) EditText mEditLowerText;
+    @Bind(R.id.saveMeme) Button mSaveMeme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
         ButterKnife.bind(this);
-        file = new File(Environment.getExternalStorageDirectory() + File.separator + "saveimage");
-        file.mkdirs();
 
         Intent intent = getIntent();
         String image = intent.getStringExtra("image");
@@ -72,13 +64,10 @@ public class EditMemeActivity extends AppCompatActivity {
         final String lower = mEditLowerText.getText().toString();
         final Bitmap memeBitmap = getBitmapFromURL(image);
 
-        final Bitmap bmap = loadBitmapFromView(mEditMemeImage);
-
         //Convert to byte array
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        memeBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         final byte[] byteArray = stream.toByteArray();
-
 
         Picasso.with(EditMemeActivity.this).load(image).into(mEditMemeImage);
 
@@ -86,20 +75,12 @@ public class EditMemeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EditMemeActivity.this, MemeActivity.class);
-                intent.putExtra("bitmap", bmap);
+                intent.putExtra("bitmap", byteArray);
                 intent.putExtra("upper", upper);
                 intent.putExtra("lower", lower);
                 startActivity(intent);
             }
         });
-    }
-
-    public static Bitmap loadBitmapFromView(View v) {
-        Bitmap b = Bitmap.createBitmap( v.getLayoutParams().width, v.getLayoutParams().height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(b);
-        v.layout(0, 0, v.getLayoutParams().width, v.getLayoutParams().height);
-        v.draw(c);
-        return b;
     }
 
     public static Bitmap getBitmapFromURL(String image) {
@@ -116,19 +97,4 @@ public class EditMemeActivity extends AppCompatActivity {
             return null;
         }
     }
-
-//    public static Bitmap drawText(Bitmap memeMap, String upper) {
-//        String text = "Write your text on image";
-//        Paint textPaint = new Paint();
-//        textPaint.setColor(Color.GREEN);
-//        textPaint.setTextSize(25);
-//        textPaint.setTextAlign(Paint.Align.RIGHT);
-//
-//        Canvas canvas = new Canvas(memeMap);
-//        canvas.drawText(text, 880, 30, textPaint);
-//
-//    }
 }
-
-//http://stackoverflow.com/questions/2339429/android-view-getdrawingcache-returns-null-only-null
-
