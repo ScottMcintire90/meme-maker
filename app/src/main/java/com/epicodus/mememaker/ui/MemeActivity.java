@@ -37,9 +37,7 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.memeImageView) ImageView mMemeImageView;
     @Bind(R.id.saveBitmap) Button mSaveBitmap;
     private Bitmap borderedBmp;
-    private Bitmap bitmap;
     private Bitmap bmp;
-    private android.graphics.Bitmap.Config bitmapConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +52,7 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
         Uri imageUri = intent.getData();
         if(imageUri == null) {
             byteArray = getIntent().getByteArrayExtra("bitmap");
-            bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
             bmp = drawTextToBitmap(this, bitmap, upperText, lowerText);
         } else {
             try {
@@ -80,7 +78,7 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
             Resources resources = mContext.getResources();
             float scale = resources.getDisplayMetrics().density;
 
-            bitmapConfig = bitmap.getConfig();
+        android.graphics.Bitmap.Config bitmapConfig = bitmap.getConfig();
 
             // set default bitmap config if none
             if(bitmapConfig == null) {
