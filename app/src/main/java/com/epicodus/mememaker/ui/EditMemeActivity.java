@@ -9,7 +9,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.ContextThemeWrapper;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +53,10 @@ public class EditMemeActivity extends AppCompatActivity {
     @Bind(R.id.editUpperText) EditText mEditUpperText;
     @Bind(R.id.editLowerText) EditText mEditLowerText;
     @Bind(R.id.saveMeme) Button mSaveMeme;
+    private Uri imageUri;
+    private Bitmap memeBitmap;
+    private byte[] byteArray;
+    private String image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,30 +65,50 @@ public class EditMemeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        String image = intent.getStringExtra("image");
-        final Bitmap memeBitmap = getBitmapFromURL(image);
 
-        //Convert to byte array
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        memeBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        final byte[] byteArray = stream.toByteArray();
+        if (intent.getData() != null) {
 
-        Picasso.with(EditMemeActivity.this).load(image).into(mEditMemeImage);
+            // get camera image
+            imageUri = intent.getData();
+            Picasso.with(EditMemeActivity.this).load(imageUri).into(mEditMemeImage);
+        } else {
+            // get bitmap from api gallery
+            image = intent.getStringExtra("image");
+            memeBitmap = getBitmapFromURL(image);
+
+            //Convert to byte array
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            memeBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byteArray = stream.toByteArray();
+            Picasso.with(EditMemeActivity.this).load(image).into(mEditMemeImage);
+        }
 
         mSaveMeme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EditMemeActivity.this, MemeActivity.class);
-                intent.putExtra("bitmap", byteArray);
-                String upper = mEditUpperText.getText().toString().toUpperCase();
-                intent.putExtra("upper", upper);
-                String lower = mEditLowerText.getText().toString().toUpperCase();
-                intent.putExtra("lower", lower);
-                startActivity(intent);
+                if (imageUri == null) {
+                    Intent intent = new Intent(EditMemeActivity.this, MemeActivity.class);
+                    intent.putExtra("bitmap", byteArray);
+                    String upper = mEditUpperText.getText().toString().toUpperCase();
+                    intent.putExtra("upper", upper);
+                    String lower = mEditLowerText.getText().toString().toUpperCase();
+                    intent.putExtra("lower", lower);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(EditMemeActivity.this, MemeActivity.class);
+                    intent.setData(imageUri);
+                    String upper = mEditUpperText.getText().toString().toUpperCase();
+                    intent.putExtra("upper", upper);
+                    String lower = mEditLowerText.getText().toString().toUpperCase();
+                    intent.putExtra("lower", lower);
+                    startActivity(intent);
+                }
+
             }
+
+            ;
         });
     }
-
     public static Bitmap getBitmapFromURL(String image) {
         try {
             URL url = new URL(image);
@@ -97,4 +123,6 @@ public class EditMemeActivity extends AppCompatActivity {
             return null;
         }
     }
+
+
 }

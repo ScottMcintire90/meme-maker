@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -26,6 +28,7 @@ import com.epicodus.mememaker.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,6 +37,10 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.memeImageView) ImageView mMemeImageView;
     @Bind(R.id.saveBitmap) Button mSaveBitmap;
     private Bitmap borderedBmp;
+    private Bitmap bitmap;
+    private Bitmap bmp;
+    private android.graphics.Bitmap.Config bitmapConfig;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,13 +50,21 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
         String upperText = intent.getStringExtra("upper");
         String lowerText = intent.getStringExtra("lower");
-
         byte[] byteArray = getIntent().getByteArrayExtra("bitmap");
-        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-
-        Bitmap bmp =drawTextToBitmap(this, bitmap, upperText, lowerText);
-        borderedBmp = addBorder(bmp, 15);
-        mMemeImageView.setImageBitmap(borderedBmp);
+        Uri imageUri = intent.getData();
+        if(imageUri == null) {
+            byteArray = getIntent().getByteArrayExtra("bitmap");
+            bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            bmp = drawTextToBitmap(this, bitmap, upperText, lowerText);
+        } else {
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                bmp = drawTextToBitmap(this, bitmap, upperText, lowerText);
+            }
+            catch (IOException e) {}
+        }
+            borderedBmp = addBorder(bmp, 15);
+            mMemeImageView.setImageBitmap(borderedBmp);
         mSaveBitmap.setOnClickListener(this);
     }
 
@@ -65,7 +80,7 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
             Resources resources = mContext.getResources();
             float scale = resources.getDisplayMetrics().density;
 
-            android.graphics.Bitmap.Config bitmapConfig =   bitmap.getConfig();
+            bitmapConfig = bitmap.getConfig();
 
             // set default bitmap config if none
             if(bitmapConfig == null) {
