@@ -2,6 +2,7 @@ package com.epicodus.mememaker.ui;
 
 import android.content.Intent;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,17 +17,19 @@ import android.widget.TextView;
 
 import com.epicodus.mememaker.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener{
     private String mName;
-    @Bind(R.id.memeListView) ListView mMemeListView;
-    @Bind(R.id.welcomeName) TextView mWelcomeName;
     @Bind(R.id.galleryButton) ImageButton mGalleryButton;
     @Bind(R.id.cameraButton) ImageButton mCameraButton;
     @Bind(R.id.photoButton) ImageButton mPhotoButton;
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     //camera
     public static final int REQUEST_TAKE_PHOTO = 0;
@@ -43,11 +46,39 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
 
         Intent intent = getIntent();
         intent.putExtra("name", mName);
-        mWelcomeName.setText("Welcome Scott!");
 
         mCameraButton.setOnClickListener(this);
         mGalleryButton.setOnClickListener(this);
         mPhotoButton.setOnClickListener(this);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+                } else {
+
+                }
+            }
+        };
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
     @Override
