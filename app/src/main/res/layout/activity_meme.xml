@@ -38,31 +38,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp" />
 
-
-    <ImageButton
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton4"
-        android:src="@drawable/send"
-        android:background="@null"
-        android:paddingLeft="20dp"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_alignRight="@+id/memeImageView"
-        android:layout_alignEnd="@+id/memeImageView" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send To A Contact"
-        android:id="@+id/textView5"
-        android:textSize="25dp"
-        android:textColor="#35699e"
-        android:paddingLeft="40dp"
-        android:paddingBottom="20dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="70dp" />
+        android:text="Save Image"
+        android:id="@+id/saveBitmap"
+        android:background="#35699e"
+        android:textColor="#FFF"
+        android:layout_below="@+id/memeImageView"
+        android:layout_alignLeft="@+id/memeImageView"
+        android:layout_alignStart="@+id/memeImageView" />
 
 
 </RelativeLayout>

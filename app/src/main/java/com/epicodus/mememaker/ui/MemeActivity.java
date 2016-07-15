@@ -1,6 +1,7 @@
 package com.epicodus.mememaker.ui;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -16,18 +17,23 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageView;
 
 import com.epicodus.mememaker.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MemeActivity extends AppCompatActivity {
+public class MemeActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.memeImageView) ImageView mMemeImageView;
-
+    @Bind(R.id.saveBitmap) Button mSaveBitmap;
+    private Bitmap borderedBmp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +48,16 @@ public class MemeActivity extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
         Bitmap bmp =drawTextToBitmap(this, bitmap, upperText, lowerText);
-        Bitmap borderedBmp = addBorder(bmp, 15);
+        borderedBmp = addBorder(bmp, 15);
         mMemeImageView.setImageBitmap(borderedBmp);
+        mSaveBitmap.setOnClickListener(this);
+    }
 
+    @Override
+    public void onClick(View v) {
+        if(v == mSaveBitmap) {
+            saveToInternalStorage(borderedBmp);
+        }
     }
 
     public Bitmap drawTextToBitmap(Context mContext, Bitmap bitmap, String mText, String yText) {
@@ -74,18 +87,18 @@ public class MemeActivity extends AppCompatActivity {
             // text color - #3D3D3D
             paint.setColor(Color.rgb(255,255,255));
             // text size in pixels
-            paint.setTextSize((int) (12 * scale));
+            paint.setTextSize((int) (11 * scale));
             //set letter spacing - requires api level 21 or above
-            paint.setLetterSpacing(.08f);
+//            paint.setLetterSpacing(.08f);
 
             //add stroke for black outline
             TextPaint strokePaint = new TextPaint();
              strokePaint.setTypeface(impactFont);
              strokePaint.setARGB(255, 0, 0, 0);
-             strokePaint.setTextSize((int) (12 * scale));
+             strokePaint.setTextSize((int) (11 * scale));
              strokePaint.setStyle(Paint.Style.STROKE);
              strokePaint.setStrokeWidth(7);
-             strokePaint.setLetterSpacing(.08f);
+//             strokePaint.setLetterSpacing(.08f);
 
             //stroke paint
              int mStrokeTextWidth = canvas.getWidth() - (int) (0 * scale);
@@ -138,5 +151,25 @@ public class MemeActivity extends AppCompatActivity {
         canvas.drawColor(Color.BLACK);
         canvas.drawBitmap(bmp, borderSize, borderSize, null);
         return bmpWithBorder;
+    }
+
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,"profile.jpg");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.d("success", directory.getAbsolutePath());
+        return directory.getAbsolutePath();
     }
 }

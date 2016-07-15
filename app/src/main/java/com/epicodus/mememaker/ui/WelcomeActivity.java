@@ -1,6 +1,7 @@
 package com.epicodus.mememaker.ui;
 
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,6 +27,12 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.galleryButton) ImageButton mGalleryButton;
     @Bind(R.id.cameraButton) ImageButton mCameraButton;
     @Bind(R.id.photoButton) ImageButton mPhotoButton;
+
+    //camera
+    public static final int REQUEST_TAKE_PHOTO = 0;
+    public static final int REQUEST_PICK_PHOTO = 2;
+
+    public static final int MEDIA_TYPE_IMAGE = 4;
 
 
     @Override
@@ -75,8 +82,8 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
             }
 
         if(v == mCameraButton) {
-                Intent intent = new Intent(WelcomeActivity.this, CameraImageActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, REQUEST_TAKE_PHOTO);
             }
         if(v == mPhotoButton) {
                 Intent intent = new Intent(WelcomeActivity.this, PhotoAPIActivity.class);
