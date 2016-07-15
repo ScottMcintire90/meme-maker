@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "728948539240",
+    "firebase_url": "https://meme-maker-3d8b9.firebaseio.com",
+    "project_id": "meme-maker-3d8b9",
+    "storage_bucket": "meme-maker-3d8b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728948539240:android:5385b1a19028d451",
+        "android_client_info": {
+          "package_name": "com.epicodus.mememaker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "728948539240-7lgr08jcvtcdphdne0jfstnkmpcdicn3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.epicodus.mememaker",
+            "certificate_hash": "7BF1518892CF0B4CB401604C7C5AF970BE8CC0C0"
+          }
+        },
+        {
+          "client_id": "728948539240-347iqmorqed26c6qr2kd4tpt9ov2qevb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvGetiyMY2AruawpSiRbueBQmls13iog0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728948539240-347iqmorqed26c6qr2kd4tpt9ov2qevb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

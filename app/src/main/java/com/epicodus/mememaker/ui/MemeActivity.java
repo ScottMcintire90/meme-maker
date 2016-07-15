@@ -42,7 +42,9 @@ public class MemeActivity extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
         Bitmap bmp =drawTextToBitmap(this, bitmap, upperText, lowerText);
-        mMemeImageView.setImageBitmap(bmp);
+        Bitmap borderedBmp = addBorder(bmp, 15);
+        mMemeImageView.setImageBitmap(borderedBmp);
+
     }
 
     public Bitmap drawTextToBitmap(Context mContext, Bitmap bitmap, String mText, String yText) {
@@ -128,5 +130,13 @@ public class MemeActivity extends AppCompatActivity {
             canvas.save();
 
             return bitmap;
+    }
+
+    public Bitmap addBorder(Bitmap bmp, int borderSize) {
+        Bitmap bmpWithBorder = Bitmap.createBitmap(bmp.getWidth() + borderSize * 2, bmp.getHeight() + borderSize * 2, bmp.getConfig());
+        Canvas canvas = new Canvas(bmpWithBorder);
+        canvas.drawColor(Color.BLACK);
+        canvas.drawBitmap(bmp, borderSize, borderSize, null);
+        return bmpWithBorder;
     }
 }
