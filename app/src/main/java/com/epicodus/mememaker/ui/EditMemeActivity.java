@@ -74,9 +74,9 @@ public class EditMemeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(EditMemeActivity.this, MemeActivity.class);
                 intent.putExtra("bitmap", byteArray);
-                String upper = mEditUpperText.getText().toString();
+                String upper = mEditUpperText.getText().toString().toUpperCase();
                 intent.putExtra("upper", upper);
-                String lower = mEditLowerText.getText().toString();
+                String lower = mEditLowerText.getText().toString().toUpperCase();
                 intent.putExtra("lower", lower);
                 startActivity(intent);
             }
