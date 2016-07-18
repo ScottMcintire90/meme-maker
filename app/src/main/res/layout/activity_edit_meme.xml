@@ -67,9 +67,9 @@
         android:id="@+id/saveMeme"
         android:background="#35699e"
         android:textColor="#FFF"
-        android:width="150dp"
+        android:width="300dp"
         android:textSize="18dp"
-        android:layout_marginBottom="35dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="75dp" />
 </RelativeLayout>

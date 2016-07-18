@@ -9,10 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:id="@+id/imageView"
-        android:layout_centerHorizontal="true"
         android:src="@drawable/background"
         android:scaleType="centerCrop"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,22 +33,43 @@
 
     <ImageView
         android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_height="300dp"
+        android:paddingTop="20dp"
         android:id="@+id/memeImageView"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
+        android:layout_centerHorizontal="true" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Image"
+        android:paddingLeft="25dp"
         android:id="@+id/saveBitmap"
-        android:background="#35699e"
-        android:textColor="#FFF"
-        android:layout_below="@+id/memeImageView"
-        android:layout_alignLeft="@+id/memeImageView"
-        android:layout_alignStart="@+id/memeImageView" />
+        android:src="@drawable/cloud"
+        android:background="@null"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="35dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:id="@+id/downloadButton"
+        android:src="@drawable/download"
+        android:layout_alignTop="@+id/saveBitmap"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:paddingRight="25dp"
+        android:id="@+id/shareButton"
+        android:src="@drawable/share"
+        android:layout_alignBottom="@+id/downloadButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

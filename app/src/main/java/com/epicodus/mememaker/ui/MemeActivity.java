@@ -22,6 +22,7 @@ import android.text.TextPaint;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ImageView;
 
@@ -37,6 +38,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -74,18 +78,20 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
             }
             catch (IOException e) {}
         }
-            borderedBmp = addBorder(bmp, 15);
-            mMemeImageView.setImageBitmap(borderedBmp);
+        borderedBmp = addBorder(bmp, 15);
+        mMemeImageView.setImageBitmap(borderedBmp);
         mSaveBitmap.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if(v == mSaveBitmap) {
-//            saveToInternalStorage(borderedBmp);
-            StorageReference imagesRef = storageRef.child("memeImage");
-//            mMemeImageView.setDrawingCacheEnabled(true);
-//            mMemeImageView.buildDrawingCache();
+            Random r = new Random();
+            int random = r.nextInt(1000000 - 0);
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat mdformat = new SimpleDateFormat("MM-dd-yyyy");
+            String memeName = "Meme Image" + random + " " + mdformat.format(calendar.getTime());
+            StorageReference imagesRef = storageRef.child(memeName);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             borderedBmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] data = baos.toByteArray();
@@ -103,7 +109,8 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 }
             });
-
+            Intent intent = new Intent(MemeActivity.this, WelcomeActivity.class);
+            startActivity(intent);
         }
     }
 
