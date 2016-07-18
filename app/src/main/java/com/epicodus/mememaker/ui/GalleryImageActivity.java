@@ -21,7 +21,6 @@ import butterknife.ButterKnife;
 
 
 public class GalleryImageActivity extends AppCompatActivity {
-    @Bind(R.id.targetUri) TextView mTargetUri;
     @Bind(R.id.targetImage) ImageView mTargetImage;
     @Bind(R.id.loadImageButton) Button mLoadImageButton;
 
@@ -49,7 +48,7 @@ public class GalleryImageActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK){
             Uri targetUri = data.getData();
-            mTargetUri.setText(targetUri.toString());
+//            mTargetUri.setText(targetUri.toString());
             Bitmap bitmap;
             try {
                 bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));

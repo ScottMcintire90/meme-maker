@@ -13,6 +13,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -25,7 +26,14 @@ import android.widget.TextView;
 import android.widget.ImageView;
 
 import com.epicodus.mememaker.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,12 +46,17 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.saveBitmap) Button mSaveBitmap;
     private Bitmap borderedBmp;
     private Bitmap bmp;
+    StorageReference storageRef;
+    FirebaseStorage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meme);
         ButterKnife.bind(this);
+
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReferenceFromUrl("gs://meme-maker-3d8b9.appspot.com");
 
         Intent intent = getIntent();
         String upperText = intent.getStringExtra("upper");
@@ -69,7 +82,28 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v == mSaveBitmap) {
-            saveToInternalStorage(borderedBmp);
+//            saveToInternalStorage(borderedBmp);
+            StorageReference imagesRef = storageRef.child("memeImage");
+//            mMemeImageView.setDrawingCacheEnabled(true);
+//            mMemeImageView.buildDrawingCache();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            borderedBmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
+
+            UploadTask uploadTask = imagesRef.putBytes(data);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                Log.d("Result:", "Unsuccessful");
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Log.d("Result:", "successful");
+                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                }
+            });
+
         }
     }
 
