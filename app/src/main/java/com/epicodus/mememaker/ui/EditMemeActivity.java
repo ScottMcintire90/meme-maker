@@ -66,12 +66,23 @@ public class EditMemeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if (intent.getData() != null) {
+//        Log.d("result", );
 
-            // get camera image
+        //get camera image
+        if (intent.getData() != null) {
             imageUri = intent.getData();
             Picasso.with(EditMemeActivity.this).load(imageUri).into(mEditMemeImage);
-        } else {
+        }
+
+        //get phone gallery image
+        if (getIntent().getByteArrayExtra("galleryImage") != null) {
+            byteArray = getIntent().getByteArrayExtra("galleryImage");
+            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            mEditMemeImage.setImageBitmap(bitmap);
+        }
+
+        //get API photo gallery image
+        if (intent.getStringExtra("image") != null) {
             // get bitmap from api gallery
             image = intent.getStringExtra("image");
             memeBitmap = getBitmapFromURL(image);

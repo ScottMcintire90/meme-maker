@@ -49,7 +49,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.mememaker.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.CameraImageActivity" />
         <activity android:name=".ui.EditMemeActivity" />
         <activity android:name=".ui.PhotoAPIActivity"></activity>
     </application>

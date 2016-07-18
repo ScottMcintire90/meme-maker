@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import com.epicodus.mememaker.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -40,6 +42,8 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.galleryButton) ImageButton mGalleryButton;
     @Bind(R.id.cameraButton) ImageButton mCameraButton;
     @Bind(R.id.photoButton) ImageButton mPhotoButton;
+    private int PICK_IMAGE_REQUEST = 1;
+    private byte[] byteArray;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -47,7 +51,6 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     //camera
     public static final int REQUEST_TAKE_PHOTO = 0;
     public static final int REQUEST_PICK_PHOTO = 2;
-
     public static final int MEDIA_TYPE_IMAGE = 4;
 
     private Uri mMediaUri;
@@ -90,9 +93,10 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         if (v == mGalleryButton) {
-            Intent intent = new Intent(Intent.ACTION_PICK,
-                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(intent, 0);
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
         }
 
         if (v == mCameraButton) {
@@ -118,14 +122,22 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
                 intent.setData(mMediaUri);
                 startActivity(intent);
             }
-            if (requestCode == REQUEST_PICK_PHOTO) {
-                Uri targetUri = data.getData();
-                Bitmap bitmap;
+            if (requestCode == PICK_IMAGE_REQUEST && data != null && data.getData() != null) {
+                Uri uri = data.getData();
+
                 try {
-                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-//                    mTargetImage.setImageBitmap(bitmap);
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    // Log.d(TAG, String.valueOf(bitmap));
+
+                    //Convert to byte array
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byteArray = stream.toByteArray();
+
+                    Intent intent = new Intent(this, EditMemeActivity.class);
+                    intent.putExtra("galleryImage", byteArray);
+                    startActivity(intent);
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else if (resultCode == RESULT_CANCELED) {
