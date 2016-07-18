@@ -1,6 +1,8 @@
 package com.epicodus.mememaker.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -24,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -87,8 +90,9 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         if (v == mGalleryButton) {
-            Intent intent = new Intent(WelcomeActivity.this, GalleryImageActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, 0);
         }
 
         if (v == mCameraButton) {
@@ -114,9 +118,19 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
                 intent.setData(mMediaUri);
                 startActivity(intent);
             }
-        }
-        else if (resultCode != RESULT_CANCELED) {
-            Toast.makeText(this, "Sorry, there was an error!", Toast.LENGTH_LONG).show();
+            if (requestCode == REQUEST_PICK_PHOTO) {
+                Uri targetUri = data.getData();
+                Bitmap bitmap;
+                try {
+                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+//                    mTargetImage.setImageBitmap(bitmap);
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Sorry, there was an error!", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
