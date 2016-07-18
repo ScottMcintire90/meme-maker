@@ -48,11 +48,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class EditMemeActivity extends AppCompatActivity {
-
     @Bind(R.id.editMemeImage) ImageView mEditMemeImage;
     @Bind(R.id.editUpperText) EditText mEditUpperText;
     @Bind(R.id.editLowerText) EditText mEditLowerText;
     @Bind(R.id.saveMeme) Button mSaveMeme;
+
     private Uri imageUri;
     private Bitmap memeBitmap;
     private byte[] byteArray;

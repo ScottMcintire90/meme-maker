@@ -35,8 +35,10 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
@@ -45,12 +47,16 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MemeActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final String TAG = LoginActivity.class.getSimpleName();
+
     @Bind(R.id.memeImageView) ImageView mMemeImageView;
     @Bind(R.id.saveBitmap) ImageButton mSaveBitmap;
     @Bind(R.id.downloadButton) ImageButton mDownloadButton;
     @Bind(R.id.shareButton) ImageButton mShareButton;
+
     private Bitmap borderedBmp;
     private Bitmap bmp;
+
     StorageReference storageRef;
     FirebaseStorage storage;
 
@@ -112,15 +118,11 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 }
             });
-            Intent intent = new Intent(MemeActivity.this, WelcomeActivity.class);
-            startActivity(intent);
         }
         if(v == mDownloadButton) {
-            try {
-                File newfile = saveToInternalStorage(borderedBmp);
-            } catch (IOException e) {
-
-            }
+            Random r = new Random();
+            int random = r.nextInt(10000 - 0);
+            saveFile(borderedBmp, "IMG" + random);
         }
         if(v == mShareButton) {
             shareIt(borderedBmp);
@@ -220,16 +222,27 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
         return bmpWithBorder;
     }
 
-    public static File saveToInternalStorage(Bitmap bitmapImage) throws IOException {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bitmapImage.compress(Bitmap.CompressFormat.JPEG, 60, bytes);
-        File f = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "testimage.jpg");
-        f.createNewFile();
-        FileOutputStream fo = new FileOutputStream(f);
-        fo.write(bytes.toByteArray());
-        fo.close();
-        return f;
+    private String saveFile(Bitmap bitmapImage, String fileName) {
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath = new File(directory, fileName);
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (Exception e) {
+            }
+            return directory.getAbsolutePath();
+        }
     }
 
     private void shareIt(Bitmap bitmap) {
