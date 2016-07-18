@@ -30,7 +30,6 @@
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:id="@+id/memeImageView"
-        android:src="@drawable/placeholder"
         android:scaleType="centerCrop"/>
 
 </LinearLayout>

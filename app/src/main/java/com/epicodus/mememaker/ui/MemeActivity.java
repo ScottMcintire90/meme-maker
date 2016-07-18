@@ -9,9 +9,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -20,10 +20,10 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.epicodus.mememaker.R;
@@ -33,7 +33,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -47,7 +46,9 @@ import butterknife.ButterKnife;
 
 public class MemeActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.memeImageView) ImageView mMemeImageView;
-    @Bind(R.id.saveBitmap) Button mSaveBitmap;
+    @Bind(R.id.saveBitmap) ImageButton mSaveBitmap;
+    @Bind(R.id.downloadButton) ImageButton mDownloadButton;
+    @Bind(R.id.shareButton) ImageButton mShareButton;
     private Bitmap borderedBmp;
     private Bitmap bmp;
     StorageReference storageRef;
@@ -81,6 +82,8 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
         borderedBmp = addBorder(bmp, 15);
         mMemeImageView.setImageBitmap(borderedBmp);
         mSaveBitmap.setOnClickListener(this);
+        mDownloadButton.setOnClickListener(this);
+        mShareButton.setOnClickListener(this);
     }
 
     @Override
@@ -111,6 +114,16 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
             });
             Intent intent = new Intent(MemeActivity.this, WelcomeActivity.class);
             startActivity(intent);
+        }
+        if(v == mDownloadButton) {
+            try {
+                File newfile = saveToInternalStorage(borderedBmp);
+            } catch (IOException e) {
+
+            }
+        }
+        if(v == mShareButton) {
+            shareIt(borderedBmp);
         }
     }
 
@@ -207,23 +220,37 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
         return bmpWithBorder;
     }
 
-    private String saveToInternalStorage(Bitmap bitmapImage){
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath=new File(directory,"profile.jpg");
+    public static File saveToInternalStorage(Bitmap bitmapImage) throws IOException {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmapImage.compress(Bitmap.CompressFormat.JPEG, 60, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "testimage.jpg");
+        f.createNewFile();
+        FileOutputStream fo = new FileOutputStream(f);
+        fo.write(bytes.toByteArray());
+        fo.close();
+        return f;
+    }
 
-        FileOutputStream fos = null;
+    private void shareIt(Bitmap bitmap) {
+        Random r = new Random();
+        int random = r.nextInt(1000000 - 0);
         try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            File file = new File(this.getCacheDir(), random + ".png");
+            FileOutputStream fOut = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+            file.setReadable(true, false);
 
+            //sharing implementation here
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+            sharingIntent.putExtra(android.content.Intent.EXTRA_STREAM, Uri.fromFile(file));
+            sharingIntent.setType("image/png");
+            startActivity(sharingIntent);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.d("success", directory.getAbsolutePath());
-        return directory.getAbsolutePath();
     }
 }
