@@ -70,7 +70,6 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
         setContentView(R.layout.activity_welcome);
         ButterKnife.bind(this);
         Firebase.setAndroidContext(this);
-
         Constants.memeList.clear();
         getMemes();
         mListView.setAdapter(new CreatedMemesAdapter(WelcomeActivity.this, Constants.memeList));

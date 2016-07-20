@@ -27,9 +27,6 @@ public class BaseActivity extends AppCompatActivity {
             logout();
             return true;
         }
-        if(id == R.id.home) {
-
-        }
 
         return super.onOptionsItemSelected(item);
     }

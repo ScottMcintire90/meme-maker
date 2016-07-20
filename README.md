@@ -37,6 +37,15 @@ You will need these programs to launch the application:
 
 Java, Android Studio, Gradle, Firebase
 
+## Example Photos
+
+![alt tag](img/1.png)
+
+![alt tag](img/2.png)
+
+![alt tag](img/3.png)
+
+
 ### Legal
 
 Copyright (c) 2016 Scott McIntire
