@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -52,7 +53,7 @@ public class EditMemeActivity extends BaseActivity {
     @Bind(R.id.editMemeImage) ImageView mEditMemeImage;
     @Bind(R.id.editUpperText) EditText mEditUpperText;
     @Bind(R.id.editLowerText) EditText mEditLowerText;
-    @Bind(R.id.saveMeme) Button mSaveMeme;
+    @Bind(R.id.saveMeme) ImageButton mSaveMeme;
 
     private Uri imageUri;
     private Bitmap memeBitmap;
