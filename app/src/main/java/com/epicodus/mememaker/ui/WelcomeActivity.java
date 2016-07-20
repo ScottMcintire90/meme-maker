@@ -242,10 +242,6 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
                     MemeUrl meme = ds.getValue(MemeUrl.class);
                     meme.setUrl(ds.getValue(MemeUrl.class).getUrl());
                     Constants.memeList.add(meme.getUrl());
-                    Log.d("Added to meme list:", meme.getUrl());
-                    for(int i = 0; i < Constants.memeList.size(); i++) {
-                        Log.d("Constants:" + i, " = " + Constants.memeList.get(i));
-                    }
                 }
             }
 
