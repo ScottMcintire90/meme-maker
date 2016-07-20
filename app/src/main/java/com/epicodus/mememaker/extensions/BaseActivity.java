@@ -1,5 +1,6 @@
 package com.epicodus.mememaker.extensions;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuInflater;
@@ -11,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class BaseActivity extends AppCompatActivity {
 
-    //THIS NEEDS TO EXTEND APPCOMPAT... DEFINITELY NOT DRY
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -26,6 +26,9 @@ public class BaseActivity extends AppCompatActivity {
         if (id == R.id.action_logout) {
             logout();
             return true;
+        }
+        if(id == R.id.home) {
+
         }
 
         return super.onOptionsItemSelected(item);
