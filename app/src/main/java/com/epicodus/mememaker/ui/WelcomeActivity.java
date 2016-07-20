@@ -2,31 +2,21 @@ package com.epicodus.mememaker.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.epicodus.mememaker.Constants;
 import com.epicodus.mememaker.R;
 import com.epicodus.mememaker.adapters.CreatedMemesAdapter;
 import com.epicodus.mememaker.extensions.BaseActivity;
-import com.epicodus.mememaker.models.Meme;
 import com.epicodus.mememaker.models.MemeUrl;
 import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,10 +31,8 @@ import com.google.firebase.database.Query;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.Bind;
@@ -83,8 +71,8 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
         Firebase.setAndroidContext(this);
 
         Constants.memeList.clear();
-        mListView.setAdapter(new CreatedMemesAdapter(WelcomeActivity.this, Constants.memeList));
         getMemes();
+        mListView.setAdapter(new CreatedMemesAdapter(WelcomeActivity.this, Constants.memeList));
         Intent intent = getIntent();
         intent.putExtra("name", mName);
 
@@ -150,7 +138,6 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
 
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                    // Log.d(TAG, String.valueOf(bitmap));
 
                     //Convert to byte array
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -188,23 +175,18 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
     private Uri getOutputMediaFileUri(int mediaType) {
         //check for external storage
         if (isExternalStorageAvailable()) {
-            //get the URI
-
             //1. Get the external storage directory
             File mediaStorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
             //2. Create unique file name
             String fileName = "";
             String fileType = "";
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-
             if (mediaType == MEDIA_TYPE_IMAGE) {
                 fileName = "IMG_" + timeStamp;
                 fileType = ".jpg";
             } else {
                 return null;
             }
-
             //3. Create the file
             File mediaFile;
             try {
@@ -230,7 +212,7 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-// Show Recently Created Memes
+    // Show Recently Created Memes
     public void getMemes() {
         mRef = FirebaseDatabase.getInstance().getReference("Url");
         Query q = mRef.orderByKey();
@@ -238,10 +220,14 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
         q.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                for(DataSnapshot ds: dataSnapshot.getChildren()) {
                     MemeUrl meme = ds.getValue(MemeUrl.class);
                     meme.setUrl(ds.getValue(MemeUrl.class).getUrl());
-                    Constants.memeList.add(meme.getUrl());
+                    if (Constants.memeList.size() < 10) {
+                        Constants.memeList.add(meme.getUrl());
+                    } else {
+                        //do nothing
+                    }
                 }
             }
 

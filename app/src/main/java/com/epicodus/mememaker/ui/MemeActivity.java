@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.epicodus.mememaker.Constants;
 import com.epicodus.mememaker.R;
@@ -139,12 +140,13 @@ public class MemeActivity extends BaseActivity implements View.OnClickListener {
                     itemRef.push().setValue(meme);
                 }
             });
-
+            Toast.makeText(MemeActivity.this, "Meme Uploaded", Toast.LENGTH_SHORT).show();
         }
         if(v == mDownloadButton) {
             Random r = new Random();
             int random = r.nextInt(10000 - 0);
             saveFile(borderedBmp, "IMG" + random);
+            Toast.makeText(MemeActivity.this, "Meme Downloaded", Toast.LENGTH_SHORT).show();
         }
         if(v == mShareButton) {
             shareIt(borderedBmp);
