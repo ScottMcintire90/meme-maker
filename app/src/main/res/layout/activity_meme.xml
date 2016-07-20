@@ -32,9 +32,9 @@
         android:shadowRadius="5"/>
 
     <ImageView
-        android:layout_width="350dp"
-        android:layout_height="300dp"
-        android:paddingTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingBottom="120dp"
         android:id="@+id/memeImageView"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
