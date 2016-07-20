@@ -28,6 +28,7 @@ import android.widget.ImageView;
 
 import com.epicodus.mememaker.Constants;
 import com.epicodus.mememaker.R;
+import com.epicodus.mememaker.extensions.BaseActivity;
 import com.epicodus.mememaker.models.Meme;
 import com.epicodus.mememaker.models.MemeUrl;
 import com.firebase.client.Firebase;
@@ -54,7 +55,7 @@ import java.util.Random;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MemeActivity extends AppCompatActivity implements View.OnClickListener {
+public class MemeActivity extends BaseActivity implements View.OnClickListener {
     public static final String TAG = LoginActivity.class.getSimpleName();
 
     @Bind(R.id.memeImageView) ImageView mMemeImageView;

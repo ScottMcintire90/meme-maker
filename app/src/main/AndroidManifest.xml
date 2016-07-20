@@ -4,17 +4,19 @@
 
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-feature android:name="android.hardware.camera2"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.camera2" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name="android.support.multidex.MultiDexApplication">
+        android:theme="@style/AppTheme">
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.android.fileprovider"
@@ -25,11 +27,11 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".ui.MainActivity">
-        </activity>
+        <activity android:name=".ui.MainActivity"></activity>
         <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -50,7 +52,8 @@
                 android:value="com.epicodus.mememaker.ui.MainActivity" />
         </activity>
         <activity android:name=".ui.EditMemeActivity" />
-        <activity android:name=".ui.PhotoAPIActivity"></activity>
+        <activity android:name=".ui.PhotoAPIActivity" />
+        <activity android:name=".extensions.BaseActivity"></activity>
     </application>
 
 </manifest>

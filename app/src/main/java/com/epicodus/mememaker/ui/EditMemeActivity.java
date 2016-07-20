@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 
 
 import com.epicodus.mememaker.R;
+import com.epicodus.mememaker.extensions.BaseActivity;
 import com.epicodus.mememaker.models.Meme;
 import com.epicodus.mememaker.ui.views.MemeImageView;
 import com.squareup.picasso.Picasso;
@@ -47,7 +48,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class EditMemeActivity extends AppCompatActivity {
+public class EditMemeActivity extends BaseActivity {
     @Bind(R.id.editMemeImage) ImageView mEditMemeImage;
     @Bind(R.id.editUpperText) EditText mEditUpperText;
     @Bind(R.id.editLowerText) EditText mEditLowerText;

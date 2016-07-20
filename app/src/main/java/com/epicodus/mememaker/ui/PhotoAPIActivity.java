@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.epicodus.mememaker.R;
 import com.epicodus.mememaker.adapters.MemeListAdapter;
+import com.epicodus.mememaker.extensions.BaseActivity;
 import com.epicodus.mememaker.models.Meme;
 import com.epicodus.mememaker.services.MemeService;
 
@@ -21,7 +22,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class PhotoAPIActivity extends AppCompatActivity {
+public class PhotoAPIActivity extends BaseActivity {
     public static final String TAG = PhotoAPIActivity.class.getSimpleName();
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     private MemeListAdapter mAdapter;

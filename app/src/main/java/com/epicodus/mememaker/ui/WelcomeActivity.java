@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.epicodus.mememaker.Constants;
 import com.epicodus.mememaker.R;
 import com.epicodus.mememaker.adapters.CreatedMemesAdapter;
+import com.epicodus.mememaker.extensions.BaseActivity;
 import com.epicodus.mememaker.models.Meme;
 import com.epicodus.mememaker.models.MemeUrl;
 import com.firebase.client.Firebase;
@@ -49,7 +50,7 @@ import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class WelcomeActivity extends BaseActivity implements View.OnClickListener {
     public static final String TAG = WelcomeActivity.class.getSimpleName();
     private String mName;
     @Bind(R.id.galleryButton)
@@ -81,7 +82,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         ButterKnife.bind(this);
         Firebase.setAndroidContext(this);
 
-
+        Constants.memeList.clear();
         mListView.setAdapter(new CreatedMemesAdapter(WelcomeActivity.this, Constants.memeList));
         getMemes();
         Intent intent = getIntent();
@@ -183,30 +184,6 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_logout) {
-            logout();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void logout() {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
 
     private Uri getOutputMediaFileUri(int mediaType) {
         //check for external storage
@@ -253,42 +230,39 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-
+// Show Recently Created Memes
     public void getMemes() {
-
         mRef = FirebaseDatabase.getInstance().getReference("Url");
         Query q = mRef.orderByKey();
 
         q.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     MemeUrl meme = ds.getValue(MemeUrl.class);
                     meme.setUrl(ds.getValue(MemeUrl.class).getUrl());
                     Constants.memeList.add(meme.getUrl());
-                    Log.d("constants", meme.getUrl() + "something");
+                    Log.d("Added to meme list:", meme.getUrl());
+                    for(int i = 0; i < Constants.memeList.size(); i++) {
+                        Log.d("Constants:" + i, " = " + Constants.memeList.get(i));
+                    }
                 }
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }

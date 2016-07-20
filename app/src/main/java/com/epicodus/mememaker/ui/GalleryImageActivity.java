@@ -15,12 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.epicodus.mememaker.R;
+import com.epicodus.mememaker.extensions.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class GalleryImageActivity extends AppCompatActivity {
+public class GalleryImageActivity extends BaseActivity {
     @Bind(R.id.targetImage) ImageView mTargetImage;
     @Bind(R.id.loadImageButton) Button mLoadImageButton;
 
