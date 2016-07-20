@@ -26,9 +26,17 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.epicodus.mememaker.Constants;
 import com.epicodus.mememaker.R;
+import com.epicodus.mememaker.models.Meme;
+import com.epicodus.mememaker.models.MemeUrl;
+import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -54,6 +62,7 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.downloadButton) ImageButton mDownloadButton;
     @Bind(R.id.shareButton) ImageButton mShareButton;
 
+    private Firebase mFirebaseRef;
     private Bitmap borderedBmp;
     private Bitmap bmp;
 
@@ -65,10 +74,10 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meme);
         ButterKnife.bind(this);
-
+        Firebase.setAndroidContext(this);
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://meme-maker-3d8b9.appspot.com");
-
+        mFirebaseRef = new Firebase("https://meme-maker-3d8b9.firebaseio.com/");
         Intent intent = getIntent();
         String upperText = intent.getStringExtra("upper");
         String lowerText = intent.getStringExtra("lower");
@@ -96,7 +105,7 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == mSaveBitmap) {
             Random r = new Random();
-            int random = r.nextInt(1000000 - 0);
+            final int random = r.nextInt(1000000 - 0);
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat mdformat = new SimpleDateFormat("MM-dd-yyyy");
             String memeName = "Meme Image" + random + " " + mdformat.format(calendar.getTime());
@@ -116,8 +125,20 @@ public class MemeActivity extends AppCompatActivity implements View.OnClickListe
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Log.d("Result:", "successful");
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    String url = downloadUrl.toString();
+//                    Constants.memeList.add(downloadUrl.toString());
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    String uid = user.getUid();
+                    DatabaseReference itemRef = FirebaseDatabase
+                            .getInstance()
+                            .getReference("Url")
+                            .child(uid);
+                    MemeUrl meme = new MemeUrl(downloadUrl.toString());
+                    itemRef.child("Url");
+                    itemRef.push().setValue(meme);
                 }
             });
+
         }
         if(v == mDownloadButton) {
             Random r = new Random();

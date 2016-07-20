@@ -97,4 +97,23 @@
         android:layout_alignLeft="@+id/galleryButton"
         android:layout_alignStart="@+id/galleryButton" />
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_below="@+id/textView8"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recently Created Memes"
+        android:id="@+id/textView5"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/textView8"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
 </RelativeLayout>

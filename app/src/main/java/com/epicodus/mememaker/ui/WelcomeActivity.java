@@ -22,37 +22,55 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.epicodus.mememaker.Constants;
 import com.epicodus.mememaker.R;
+import com.epicodus.mememaker.adapters.CreatedMemesAdapter;
+import com.epicodus.mememaker.models.Meme;
+import com.epicodus.mememaker.models.MemeUrl;
+import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener{
+public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = WelcomeActivity.class.getSimpleName();
     private String mName;
-    @Bind(R.id.galleryButton) ImageButton mGalleryButton;
-    @Bind(R.id.cameraButton) ImageButton mCameraButton;
-    @Bind(R.id.photoButton) ImageButton mPhotoButton;
+    @Bind(R.id.galleryButton)
+    ImageButton mGalleryButton;
+    @Bind(R.id.cameraButton)
+    ImageButton mCameraButton;
+    @Bind(R.id.photoButton)
+    ImageButton mPhotoButton;
+    @Bind(R.id.listView)
+    ListView mListView;
     private int PICK_IMAGE_REQUEST = 1;
     private byte[] byteArray;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
+    private Firebase mFirebaseRef;
     //camera
     public static final int REQUEST_TAKE_PHOTO = 0;
     public static final int REQUEST_PICK_PHOTO = 2;
     public static final int MEDIA_TYPE_IMAGE = 4;
-
+    private DatabaseReference mRef;
     private Uri mMediaUri;
 
 
@@ -61,7 +79,11 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         ButterKnife.bind(this);
+        Firebase.setAndroidContext(this);
 
+
+        mListView.setAdapter(new CreatedMemesAdapter(WelcomeActivity.this, Constants.memeList));
+        getMemes();
         Intent intent = getIntent();
         intent.putExtra("name", mName);
 
@@ -167,6 +189,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -223,10 +246,50 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
 
     private boolean isExternalStorageAvailable() {
         String state = Environment.getExternalStorageState();
-        if(Environment.MEDIA_MOUNTED.equals(state)) {
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
             return true;
         } else {
             return false;
         }
+    }
+
+
+    public void getMemes() {
+
+        mRef = FirebaseDatabase.getInstance().getReference("Url");
+        Query q = mRef.orderByKey();
+
+        q.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    MemeUrl meme = ds.getValue(MemeUrl.class);
+                    meme.setUrl(ds.getValue(MemeUrl.class).getUrl());
+                    Constants.memeList.add(meme.getUrl());
+                    Log.d("constants", meme.getUrl() + "something");
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
