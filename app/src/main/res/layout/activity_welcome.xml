@@ -30,108 +30,37 @@
         android:shadowDy="5"
         android:shadowRadius="5"/>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:id="@+id/cameraButton"
-        android:src="@drawable/camera"
-        android:background="@null"
-        android:paddingTop="12dp"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:id="@+id/photoButton"
-        android:src="@drawable/gallery"
-        android:paddingTop="13dp"
-        android:layout_marginLeft="29dp"
-        android:layout_marginStart="29dp"
-        android:layout_above="@+id/textView8"
-        android:layout_alignLeft="@+id/textView5"
-        android:layout_alignStart="@+id/textView5" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:paddingRight="20dp"
-        android:id="@+id/galleryButton"
-        android:src="@drawable/photos"
-        android:paddingTop="18dp"
-        android:layout_below="@+id/textView"
-        android:layout_toRightOf="@+id/refreshMemes"
-        android:layout_toEndOf="@+id/refreshMemes" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Camera"
-        android:paddingRight="13dp"
-        android:id="@+id/textView7"
-        android:layout_below="@+id/galleryButton"
-        android:layout_alignRight="@+id/cameraButton"
-        android:layout_alignEnd="@+id/cameraButton" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Popular"
-        android:paddingLeft="3dp"
-        android:id="@+id/textView8"
-        android:layout_alignTop="@+id/textView7"
-        android:layout_alignLeft="@+id/photoButton"
-        android:layout_alignStart="@+id/photoButton" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingRight="4dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Gallery"
-        android:id="@+id/textView9"
-        android:layout_alignTop="@+id/textView8"
-        android:layout_alignLeft="@+id/galleryButton"
-        android:layout_alignStart="@+id/galleryButton" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_below="@+id/textView8"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="55dp" />
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="41dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recent Memes"
+        android:text="Recently Created Memes"
         android:id="@+id/textView5"
         android:paddingTop="10dp"
         android:textSize="20sp"
         android:textColor="#35699e"
-        android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/textView7"
-        android:layout_alignLeft="@+id/textView" />
+        android:layout_below="@+id/createMemeButton"
+        android:layout_alignRight="@+id/createMemeButton"
+        android:layout_alignEnd="@+id/createMemeButton" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/refreshMemes"
-        android:layout_marginLeft="25dp"
         android:background="@drawable/refresh24"
         android:layout_alignBottom="@+id/textView5"
-        android:layout_toRightOf="@+id/textView8"
-        android:layout_toEndOf="@+id/textView8" />
+        android:layout_toRightOf="@+id/textView5"
+        android:layout_toEndOf="@+id/textView5"
+        android:layout_marginLeft="20dp"/>
 
     <View android:background="#35699e"
         android:layout_marginTop="54dp"
@@ -139,5 +68,18 @@
         android:layout_centerHorizontal="true"
         android:layout_height="3dp"
         android:id="@+id/view" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create a Meme"
+        android:background="#35699e"
+        android:id="@+id/createMemeButton"
+        android:textColor="#FFF"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:width="170dp"
+        android:layout_below="@+id/view"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
