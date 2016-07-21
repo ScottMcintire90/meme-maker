@@ -1,5 +1,6 @@
 package com.epicodus.mememaker.ui;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -10,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.ContextThemeWrapper;
@@ -35,6 +37,12 @@ import com.epicodus.mememaker.models.Meme;
 import com.epicodus.mememaker.ui.views.MemeImageView;
 import com.squareup.picasso.Picasso;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -45,6 +53,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -59,6 +68,9 @@ public class EditMemeActivity extends BaseActivity {
     private Bitmap memeBitmap;
     private byte[] byteArray;
     private String image;
+    private Bitmap asyncBitmap;
+
+    private ProgressDialog simpleWaitDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +80,6 @@ public class EditMemeActivity extends BaseActivity {
 
         Intent intent = getIntent();
 
-//        Log.d("result", );
 
         //get camera image
         if (intent.getData() != null) {
@@ -87,8 +98,14 @@ public class EditMemeActivity extends BaseActivity {
         if (intent.getStringExtra("image") != null) {
             // get bitmap from api gallery
             image = intent.getStringExtra("image");
-            memeBitmap = getBitmapFromURL(image);
-
+//            memeBitmap = getBitmapFromURL(image);
+           new AsyncTaskLoadImage(mEditMemeImage).execute(image);
+            try {
+                memeBitmap = new AsyncTaskLoadImage(mEditMemeImage).execute(image).get();
+            }
+            catch (ExecutionException | InterruptedException ei) {
+                ei.printStackTrace();
+            }
             //Convert to byte array
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             memeBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -122,20 +139,70 @@ public class EditMemeActivity extends BaseActivity {
             ;
         });
     }
-    public static Bitmap getBitmapFromURL(String image) {
-        try {
-            URL url = new URL(image);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+//    public static Bitmap getBitmapFromURL(String image) {
+//        try {
+//            URL url = new URL(image);
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setDoInput(true);
+//            connection.connect();
+//            InputStream input = connection.getInputStream();
+//            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+//            return myBitmap;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+
+
+    public class AsyncTaskLoadImage  extends AsyncTask<String, String, Bitmap> {
+        private final static String TAG = "AsyncTaskLoadImage";
+        private ImageView imageView;
+
+        public AsyncTaskLoadImage(ImageView imageView) {
+            this.imageView = imageView;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            asyncBitmap = null;
+            try {
+                URL url = new URL(params[0]);
+                asyncBitmap = BitmapFactory.decodeStream((InputStream)url.getContent());
+            } catch (IOException e) {
+                Log.e(TAG, e.getMessage());
+            }
+            return asyncBitmap;
+        }
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
         }
     }
 
+    public class SendTaskLoadImage  extends AsyncTask<String, String, Bitmap> {
+        private final static String TAG = "AsyncTaskLoadImage";
+        private ImageView imageView;
+
+        public SendTaskLoadImage(ImageView imageView) {
+            this.imageView = imageView;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            asyncBitmap = null;
+            try {
+                URL url = new URL(params[0]);
+                asyncBitmap = BitmapFactory.decodeStream((InputStream)url.getContent());
+            } catch (IOException e) {
+                Log.e(TAG, e.getMessage());
+            }
+            return asyncBitmap;
+        }
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
+        }
+    }
 
 }
