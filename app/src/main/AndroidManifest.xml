@@ -27,7 +27,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".ui.MainActivity"></activity>
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,7 +53,8 @@
         </activity>
         <activity android:name=".ui.EditMemeActivity" />
         <activity android:name=".ui.PhotoAPIActivity" />
-        <activity android:name=".extensions.BaseActivity"></activity>
+        <activity android:name=".extensions.BaseActivity" />
+        <activity android:name=".ui.MediaSelectionActivity"></activity>
     </application>
 
 </manifest>

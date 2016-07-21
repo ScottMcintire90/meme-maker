@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
     @Bind(R.id.galleryButton) ImageButton mGalleryButton;
     @Bind(R.id.cameraButton) ImageButton mCameraButton;
     @Bind(R.id.photoButton) ImageButton mPhotoButton;
+    @Bind(R.id.refreshMemes) ImageButton mRefreshMemes;
     @Bind(R.id.listView) ListView mListView;
     private int PICK_IMAGE_REQUEST = 1;
     private byte[] byteArray;
@@ -76,6 +78,7 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
         mPhotoButton.setOnClickListener(this);
         mCameraButton.setOnClickListener(this);
         mGalleryButton.setOnClickListener(this);
+        mRefreshMemes.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -117,6 +120,10 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
                 startActivityForResult(intent, REQUEST_TAKE_PHOTO);
             }
+        }
+        if (v == mRefreshMemes) {
+            getMemes();
+            mListView.setAdapter(new CreatedMemesAdapter(WelcomeActivity.this, Constants.memeList));
         }
     }
 
@@ -246,11 +253,5 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
             }
         });
     }
-
-    public void refreshMemes() {
-        Intent intent = new Intent(this, WelcomeActivity.class);
-        startActivity(intent);
-    }
-
 
 }

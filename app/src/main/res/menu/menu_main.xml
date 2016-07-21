@@ -2,10 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_create"
+        android:icon="@drawable/draw"
+        android:title="action_create"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_account"
+        android:icon="@drawable/account"
+        android:title="action_account"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/action_home"
         android:icon="@drawable/home"
-        android:title="action_favorite"
-        app:showAsAction="ifRoom"/>
+        android:title="action_home"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_settings"
