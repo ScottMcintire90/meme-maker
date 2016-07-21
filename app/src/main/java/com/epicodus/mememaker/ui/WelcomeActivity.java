@@ -42,20 +42,17 @@ import butterknife.ButterKnife;
 public class WelcomeActivity extends BaseActivity implements View.OnClickListener {
     public static final String TAG = WelcomeActivity.class.getSimpleName();
     private String mName;
-    @Bind(R.id.galleryButton)
-    ImageButton mGalleryButton;
-    @Bind(R.id.cameraButton)
-    ImageButton mCameraButton;
-    @Bind(R.id.photoButton)
-    ImageButton mPhotoButton;
-    @Bind(R.id.listView)
-    ListView mListView;
+    @Bind(R.id.galleryButton) ImageButton mGalleryButton;
+    @Bind(R.id.cameraButton) ImageButton mCameraButton;
+    @Bind(R.id.photoButton) ImageButton mPhotoButton;
+    @Bind(R.id.listView) ListView mListView;
     private int PICK_IMAGE_REQUEST = 1;
     private byte[] byteArray;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private Firebase mFirebaseRef;
+
     //camera
     public static final int REQUEST_TAKE_PHOTO = 0;
     public static final int REQUEST_PICK_PHOTO = 2;
@@ -226,7 +223,8 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
                     if (Constants.memeList.size() < 10) {
                         Constants.memeList.add(meme.getUrl());
                     } else {
-                        //do nothing
+                        Constants.memeList.remove(0);
+                        Constants.memeList.add(meme.getUrl());
                     }
                 }
             }
@@ -248,4 +246,11 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
             }
         });
     }
+
+    public void refreshMemes() {
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
+    }
+
+
 }
