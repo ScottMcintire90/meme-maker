@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import com.epicodus.mememaker.R;
 import com.epicodus.mememaker.ui.LoginActivity;
+import com.epicodus.mememaker.ui.WelcomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class BaseActivity extends AppCompatActivity {
@@ -25,6 +26,11 @@ public class BaseActivity extends AppCompatActivity {
 
         if (id == R.id.action_logout) {
             logout();
+            return true;
+        }
+        if (id == R.id.action_home) {
+            Intent intent = new Intent(this, WelcomeActivity.class);
+            startActivity(intent);
             return true;
         }
 

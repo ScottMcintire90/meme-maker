@@ -128,7 +128,6 @@ public class MemeActivity extends BaseActivity implements View.OnClickListener {
                     Log.d("Result:", "successful");
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     String url = downloadUrl.toString();
-//                    Constants.memeList.add(downloadUrl.toString());
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     String uid = user.getUid();
                     DatabaseReference itemRef = FirebaseDatabase
@@ -180,7 +179,7 @@ public class MemeActivity extends BaseActivity implements View.OnClickListener {
             // text color - #3D3D3D
             paint.setColor(Color.rgb(255,255,255));
             // text size in pixels
-            paint.setTextSize((int) (11 * scale));
+            paint.setTextSize((int) (28 * scale));
             //set letter spacing - requires api level 21 or above
 //            paint.setLetterSpacing(.08f);
 
@@ -188,7 +187,7 @@ public class MemeActivity extends BaseActivity implements View.OnClickListener {
             TextPaint strokePaint = new TextPaint();
              strokePaint.setTypeface(impactFont);
              strokePaint.setARGB(255, 0, 0, 0);
-             strokePaint.setTextSize((int) (11 * scale));
+             strokePaint.setTextSize((int) (28 * scale));
              strokePaint.setStyle(Paint.Style.STROKE);
              strokePaint.setStrokeWidth(7);
 //             strokePaint.setLetterSpacing(.08f);
