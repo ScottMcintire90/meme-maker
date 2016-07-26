@@ -19,8 +19,6 @@ import java.util.ArrayList;
 
 
 public class FirebaseMemeViewHolder extends RecyclerView.ViewHolder {
-    private static final int MAX_WIDTH = 200;
-    private static final int MAX_HEIGHT = 200;
 
     View mView;
     Context mContext;
@@ -36,8 +34,7 @@ public class FirebaseMemeViewHolder extends RecyclerView.ViewHolder {
 
         Picasso.with(mContext)
                 .load(memeUrl.getUrl())
-                .resize(MAX_WIDTH, MAX_HEIGHT)
-                .centerCrop()
+                .fit()
                 .into(memeImageView);
     }
 }
