@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.epicodus.mememaker.R;
 import com.epicodus.mememaker.adapters.FirebaseMemeViewHolder;
@@ -30,10 +31,11 @@ import butterknife.ButterKnife;
 public class UserAccountActivity extends BaseActivity {
     private DatabaseReference mMemeReference;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
-
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private String uid;
+    private String userName;
     ArrayList<MemeUrl> mMemeList = new ArrayList<>();
-
+    @Bind(R.id.userTitle) TextView mUserTitle;
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
 
 
@@ -72,13 +74,24 @@ public class UserAccountActivity extends BaseActivity {
 
         mMemeReference = FirebaseDatabase.getInstance().getReference("Url").child(uid);
         setUpFirebaseAdapter();
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                   userName = user.getDisplayName();
+            }
+        };
+
+        mUserTitle.setText(userName + "'s Memes");
     }
 
 
 
     private void setUpFirebaseAdapter() {
         mFirebaseAdapter = new FirebaseRecyclerAdapter<MemeUrl, FirebaseMemeViewHolder>
-                (MemeUrl.class, R.layout.meme_list_item, FirebaseMemeViewHolder.class,
+                (MemeUrl.class, R.layout.user_meme_list, FirebaseMemeViewHolder.class,
                         mMemeReference) {
 
             @Override
