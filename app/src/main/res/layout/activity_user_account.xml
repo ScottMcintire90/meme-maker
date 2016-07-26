@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.epicodus.mememaker.ui.CameraImageActivity">
-
+    tools:context="com.epicodus.mememaker.ui.UserAccountActivity">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
@@ -20,32 +19,13 @@
         android:text="MEME MAKER"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="40dp"
+        android:textSize="45sp"
         android:textStyle="bold"
-        android:letterSpacing=".3"
+        android:letterSpacing=".1"
         android:textColor="#35699e"
         android:id="@+id/textView"
         android:shadowColor="#FFF"
         android:shadowDx="5"
         android:shadowDy="5"
         android:shadowRadius="5"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cameraImage"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="86dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/cameraButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="76dp" />
-
-
 </RelativeLayout>

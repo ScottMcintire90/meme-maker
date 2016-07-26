@@ -54,7 +54,8 @@
         <activity android:name=".ui.EditMemeActivity" />
         <activity android:name=".ui.PhotoAPIActivity" />
         <activity android:name=".extensions.BaseActivity" />
-        <activity android:name=".ui.MediaSelectionActivity"></activity>
+        <activity android:name=".ui.MediaSelectionActivity" />
+        <activity android:name=".ui.UserAccountActivity"></activity>
     </application>
 
 </manifest>

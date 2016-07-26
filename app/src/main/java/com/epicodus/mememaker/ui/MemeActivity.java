@@ -179,7 +179,7 @@ public class MemeActivity extends BaseActivity implements View.OnClickListener {
             // text color - #3D3D3D
             paint.setColor(Color.rgb(255,255,255));
             // text size in pixels
-            paint.setTextSize((int) (28 * scale));
+            paint.setTextSize((int) (13 * scale));
             //set letter spacing - requires api level 21 or above
 //            paint.setLetterSpacing(.08f);
 
@@ -187,7 +187,7 @@ public class MemeActivity extends BaseActivity implements View.OnClickListener {
             TextPaint strokePaint = new TextPaint();
              strokePaint.setTypeface(impactFont);
              strokePaint.setARGB(255, 0, 0, 0);
-             strokePaint.setTextSize((int) (28 * scale));
+             strokePaint.setTextSize((int) (13 * scale));
              strokePaint.setStyle(Paint.Style.STROKE);
              strokePaint.setStrokeWidth(7);
 //             strokePaint.setLetterSpacing(.08f);

@@ -7,7 +7,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.epicodus.mememaker.R;
+import com.epicodus.mememaker.ui.EditMemeActivity;
 import com.epicodus.mememaker.ui.LoginActivity;
+import com.epicodus.mememaker.ui.MediaSelectionActivity;
+import com.epicodus.mememaker.ui.UserAccountActivity;
 import com.epicodus.mememaker.ui.WelcomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -30,6 +33,16 @@ public class BaseActivity extends AppCompatActivity {
         }
         if (id == R.id.action_home) {
             Intent intent = new Intent(this, WelcomeActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_create) {
+            Intent intent = new Intent(this, MediaSelectionActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_account) {
+            Intent intent = new Intent(this, UserAccountActivity.class);
             startActivity(intent);
             return true;
         }
