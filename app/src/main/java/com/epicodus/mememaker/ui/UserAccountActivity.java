@@ -6,30 +6,24 @@ import android.support.v7.widget.RecyclerView;
 
 import com.epicodus.mememaker.R;
 import com.epicodus.mememaker.extensions.BaseActivity;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+
 public class UserAccountActivity extends BaseActivity {
     private UserAccountActivity mAdapter2;
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView2;
+    private DatabaseReference mRef;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_account);
     }
 
-    public void renderMemeList(ArrayList array) {
-        UserAccountActivity.this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-//                mAdapter2 = new ItemListAdapter(getApplicationContext(), mSortedArray);
-//                mRecyclerView2.setAdapter(mAdapter2);
-//                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(UserAccountActivity.this);
-//                mRecyclerView2.setLayoutManager(layoutManager);
-//                mRecyclerView2.setHasFixedSize(true);
-//            }
-//        });
-            }
 
-        });
     }
 }
