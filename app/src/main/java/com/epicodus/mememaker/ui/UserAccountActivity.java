@@ -75,15 +75,15 @@ public class UserAccountActivity extends BaseActivity {
         mMemeReference = FirebaseDatabase.getInstance().getReference("Url").child(uid);
         setUpFirebaseAdapter();
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                   userName = user.getDisplayName();
-            }
-        };
-
+//        mAuthListener = new FirebaseAuth.AuthStateListener() {
+//
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                   userName = user.getDisplayName();
+//            }
+//        };
+        userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         mUserTitle.setText(userName + "'s Memes");
     }
 
