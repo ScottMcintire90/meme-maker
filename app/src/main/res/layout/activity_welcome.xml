@@ -34,33 +34,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_below="@+id/textView5"
+        android:layout_below="@+id/view"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="41dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recently Created Memes"
-        android:id="@+id/textView5"
-        android:paddingTop="10dp"
-        android:textSize="20sp"
-        android:textColor="#35699e"
-        android:textStyle="bold"
-        android:layout_below="@+id/createMemeButton"
-        android:layout_alignRight="@+id/createMemeButton"
-        android:layout_alignEnd="@+id/createMemeButton" />
+        android:layout_alignParentStart="true" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/refreshMemes"
         android:background="@drawable/refresh24"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_toRightOf="@+id/textView5"
-        android:layout_toEndOf="@+id/textView5"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_centerHorizontal="true" />
 
     <View android:background="#35699e"
         android:layout_marginTop="54dp"
@@ -68,18 +52,5 @@
         android:layout_centerHorizontal="true"
         android:layout_height="3dp"
         android:id="@+id/view" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create a Meme"
-        android:background="#35699e"
-        android:id="@+id/createMemeButton"
-        android:textColor="#FFF"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        android:width="170dp"
-        android:layout_below="@+id/view"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

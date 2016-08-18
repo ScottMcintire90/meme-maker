@@ -27,16 +27,7 @@ public class BaseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_logout) {
-            logout();
-            return true;
-        }
         if (id == R.id.action_home) {
-            Intent intent = new Intent(this, WelcomeActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.action_create) {
             Intent intent = new Intent(this, MediaSelectionActivity.class);
             startActivity(intent);
             return true;

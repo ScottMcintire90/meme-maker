@@ -68,7 +68,6 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
                 } else {
 
                 }

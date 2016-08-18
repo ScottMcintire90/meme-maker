@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_create"
-        android:icon="@drawable/draw"
-        android:title="action_create"
-        app:showAsAction="always"/>
-
-    <item
-        android:id="@+id/action_account"
-        android:icon="@drawable/account"
-        android:title="action_account"
-        app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_home"
@@ -25,14 +14,6 @@
         android:title="@string/action_settings"
         android:icon="@drawable/set"
         app:showAsAction="always" >
-
-        <menu>
-            <item
-                android:id="@+id/action_logout"
-                android:title="Logout"
-                android:visible="true"
-                app:showAsAction="never" />
-        </menu>
 
     </item>
 

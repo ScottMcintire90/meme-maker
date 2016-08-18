@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.epicodus.mememaker.Constants;
@@ -45,6 +46,11 @@ public class MediaSelectionActivity extends BaseActivity implements View.OnClick
     @Bind(R.id.galleryButton) ImageButton mGalleryButton;
     @Bind(R.id.cameraButton) ImageButton mCameraButton;
     @Bind(R.id.photoButton) ImageButton mPhotoButton;
+    @Bind(R.id.starButton) ImageButton mStarButton;
+    @Bind(R.id.apiText) TextView mApiText;
+    @Bind(R.id.phoneGalleryText) TextView mPhoneGalleryText;
+    @Bind(R.id.phoneCameraText) TextView mPhoneCameraText;
+    @Bind(R.id.starText) TextView mStarText;
     private int PICK_IMAGE_REQUEST = 1;
     private byte[] byteArray;
 
@@ -70,6 +76,11 @@ public class MediaSelectionActivity extends BaseActivity implements View.OnClick
         mPhotoButton.setOnClickListener(this);
         mCameraButton.setOnClickListener(this);
         mGalleryButton.setOnClickListener(this);
+        mStarButton.setOnClickListener(this);
+        mApiText.setOnClickListener(this);
+        mPhoneGalleryText.setOnClickListener(this);
+        mPhoneCameraText.setOnClickListener(this);
+        mStarText.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -85,19 +96,19 @@ public class MediaSelectionActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if (v == mPhotoButton) {
+        if (v == mPhotoButton || v == mApiText) {
             Intent intent = new Intent(MediaSelectionActivity.this, PhotoAPIActivity.class);
             startActivity(intent);
         }
 
-        if (v == mGalleryButton) {
+        if (v == mGalleryButton || v == mPhoneGalleryText) {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
         }
 
-        if (v == mCameraButton) {
+        if (v == mCameraButton || v == mPhoneCameraText) {
             mMediaUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
             if (mMediaUri == null) {
                 Toast.makeText(this, "There was a problem accessing your device's external storage.",
@@ -107,6 +118,11 @@ public class MediaSelectionActivity extends BaseActivity implements View.OnClick
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
                 startActivityForResult(intent, REQUEST_TAKE_PHOTO);
             }
+        }
+
+        if(v == mStarButton || v == mStarText) {
+            Intent intent = new Intent(MediaSelectionActivity.this, WelcomeActivity.class);
+            startActivity(intent);
         }
     }
 

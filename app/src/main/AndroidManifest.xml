@@ -14,7 +14,7 @@
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Master Memes"
+        android:label="Meme Maker"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <provider
@@ -29,18 +29,17 @@
 
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.SignUpActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.mememaker.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.WelcomeActivity" />
+        <activity android:name=".ui.WelcomeActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.epicodus.mememaker.ui.MediaSelectionActivity" />
+        </activity>
         <activity android:name=".ui.MemeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -54,7 +53,13 @@
         <activity android:name=".ui.EditMemeActivity" />
         <activity android:name=".ui.PhotoAPIActivity" />
         <activity android:name=".extensions.BaseActivity" />
-        <activity android:name=".ui.MediaSelectionActivity" />
+        <activity android:name=".ui.MediaSelectionActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>/>
+        </activity>
         <activity android:name=".ui.UserAccountActivity"></activity>
     </application>
 
