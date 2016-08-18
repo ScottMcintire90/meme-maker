@@ -33,12 +33,11 @@ import com.google.firebase.database.Query;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class WelcomeActivity extends BaseActivity implements View.OnClickListener {
+public class WelcomeActivity extends BaseActivity {
     public static final String TAG = WelcomeActivity.class.getSimpleName();
     private String mName;
     @Bind(R.id.refreshMemes) ImageButton mRefreshMemes;
     @Bind(R.id.listView) ListView mListView;
-    @Bind(R.id.createMemeButton) Button mCreateMemeButton;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -57,9 +56,6 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
         Intent intent = getIntent();
         intent.putExtra("name", mName);
 
-        mRefreshMemes.setOnClickListener(this);
-        mCreateMemeButton.setOnClickListener(this);
-
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -74,19 +70,6 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
             }
         };
     }
-
-    @Override
-    public void onClick(View v) {
-        if (v == mRefreshMemes) {
-            getMemes();
-            mListView.setAdapter(new CreatedMemesAdapter(WelcomeActivity.this, Constants.memeList));
-        }
-        if (v == mCreateMemeButton) {
-            Intent intent = new Intent(WelcomeActivity.this, MediaSelectionActivity.class);
-            startActivity(intent);
-        }
-    }
-
     @Override
     public void onStart() {
         super.onStart();

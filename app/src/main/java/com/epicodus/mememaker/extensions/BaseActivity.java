@@ -32,11 +32,6 @@ public class BaseActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
-        if (id == R.id.action_account) {
-            Intent intent = new Intent(this, UserAccountActivity.class);
-            startActivity(intent);
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

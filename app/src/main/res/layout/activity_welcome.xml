@@ -38,14 +38,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/refreshMemes"
-        android:background="@drawable/refresh24"
-        android:layout_marginLeft="20dp"
-        android:layout_centerHorizontal="true" />
-
     <View android:background="#35699e"
         android:layout_marginTop="54dp"
         android:layout_width = "400dp"
