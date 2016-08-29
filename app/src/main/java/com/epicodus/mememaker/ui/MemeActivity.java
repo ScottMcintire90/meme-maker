@@ -51,6 +51,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import butterknife.Bind;
@@ -144,7 +145,8 @@ public class MemeActivity extends BaseActivity implements View.OnClickListener {
         if(v == mDownloadButton) {
             Random r = new Random();
             int random = r.nextInt(10000 - 0);
-            saveFile(borderedBmp, "IMG" + random);
+//            saveFile(borderedBmp, "IMG" + random);
+            SaveImage(borderedBmp);
             Toast.makeText(MemeActivity.this, "Meme Downloaded", Toast.LENGTH_SHORT).show();
         }
         if(v == mShareButton) {
@@ -245,28 +247,27 @@ public class MemeActivity extends BaseActivity implements View.OnClickListener {
         return bmpWithBorder;
     }
 
-    private String saveFile(Bitmap bitmapImage, String fileName) {
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath = new File(directory, fileName);
-
-        FileOutputStream fos = null;
+    private void SaveImage(Bitmap finalBitmap) {
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/saved_images");
+        myDir.mkdirs();
+        Random generator = new Random();
+        int n = 10000;
+        n = generator.nextInt(n);
+        String fname = "Image-" + n + ".jpg";
+        File file = new File(myDir, fname);
+        if (file.exists()) file.delete();
         try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            FileOutputStream out = new FileOutputStream(file);
+            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (Exception e) {
-            }
-            return directory.getAbsolutePath();
         }
     }
+
 
     private void shareIt(Bitmap bitmap) {
         Random r = new Random();

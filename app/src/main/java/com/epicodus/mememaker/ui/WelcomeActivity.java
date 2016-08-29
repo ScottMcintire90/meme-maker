@@ -36,7 +36,7 @@ import butterknife.ButterKnife;
 public class WelcomeActivity extends BaseActivity {
     public static final String TAG = WelcomeActivity.class.getSimpleName();
     private String mName;
-    @Bind(R.id.refreshMemes) ImageButton mRefreshMemes;
+
     @Bind(R.id.listView) ListView mListView;
 
     private FirebaseAuth mAuth;
