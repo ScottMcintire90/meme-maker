@@ -139,20 +139,6 @@ public class EditMemeActivity extends BaseActivity {
             ;
         });
     }
-//    public static Bitmap getBitmapFromURL(String image) {
-//        try {
-//            URL url = new URL(image);
-//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//            connection.setDoInput(true);
-//            connection.connect();
-//            InputStream input = connection.getInputStream();
-//            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-//            return myBitmap;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
 
 
     public class AsyncTaskLoadImage  extends AsyncTask<String, String, Bitmap> {
